@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sal's Brews</title>
     <link rel="stylesheet" href="../css/loginStyles.css">
+    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
 </head>
+
 <body>
-    <input type="text" name="user-name" id="user-name">
-    <input type="password" name="password" id="password">
-    <input type="button" value="Login">
-    <p>Don't have an account? <a href="">create here</a></p>
+    <div class="login-container">
+        <img src="..\assets\SBLogoLight.png" alt="Sal's Brews Logo" class="logo">
+        <h2>SIGN-IN:</h2>
+        
+        <label for="user-name">USERNAME</label>
+        <input type="text" name="user-name" id="user-name">
+
+        <label for="password">PASSWORD</label>
+        <input type="password" name="password" id="password">
+
+        <button class="login-btn">LOG-IN</button>
+
+        <p class="signup-text">Don't have an account yet? <a href="register.html">Click here</a> to Sign-up.</p>
+    </div>
 </body>
 </html>
