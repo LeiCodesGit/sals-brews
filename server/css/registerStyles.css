@@ -11,12 +11,69 @@ body {
 }
 
 #create-acc {
+    margin-top: 60px;
     text-align: center;
     color: #f7efda;
     font-family: Arial; /*te,p font*/
 }
 
 #create-acc img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+#create-acc p {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+#user-info {
+    background-color: #733015;
+    display: flex;
+    margin-top: 30px;
+    padding: 50px;
+    border-radius: 10px;
+}
+#user-info input {
+    margin: 10px;
+    padding: 10px;
+    font-size: 18px;
+    color: #452e1e;
+    border-radius: 8px;
+    border: none;
+}
+
+#user-info input:focus {
+    border-color: #452e1e;
+}
+
+#container-1 {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#container-2 {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#create-acc button{
+    margin: 50px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffff;
+    background-color: #53443b;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+#create-acc button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
