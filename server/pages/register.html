@@ -8,9 +8,24 @@
     <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
 </head>
 <body>
-    <div id="create-acc">
-        <img src="../assets/SBLogoLight.png" alt="SBLogoLight">
-        <h1>CREATE YOUR ACCOUNT:</h1>
-    </div>
+    <form action="">
+        <div id="create-acc">
+            <img src="../assets/SBLogoLight.png" alt="SBLogoLight">
+            <p>CREATE YOUR ACCOUNT:</p>
+            <div id="user-info">
+                <div id="container-1">
+                    <input type="text" name="first-name" id="first-name" placeholder="First Name">
+                    <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    <input type="text" name="username" id="username" placeholder="Username">
+                </div>
+                <div id="container-2">
+                    <input type="tel" name="contact-number" id="contact-number" placeholder="Contact Number">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="text" name="address" id="address" placeholder="address">
+                </div>
+            </div>
+            <button type="submit">REGISTER</button>
+        </div>
+    </form>
 </body>
 </html>
