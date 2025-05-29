@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #452e1e;
+}
+.navbar {
+    background: #733015;
+    color: #f7efda;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.salsHeader{
+    background: #733015;
+    color: #f7efda;
+}
+
+.salsLink{
+    display: inline-block;
+    text-decoration: none;
+    color: #f7efda;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 25px;
+    align-items: center;
+}
+
+.hp1{
+    padding-top: 40px;
+    color: #f7efda;
+    font-size: 80px;
+    max-width: 1000px;
+    white-space: nowrap;
+}
+
+.php1{
+    color: #f7efda;
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.homepage {
+   padding: 0 40px;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: space-around;
+   gap: 20px;
+   max-width: 400px;
+}
+
+.homepageText{
+    flex: 1;
+}
+.coffeehome{
+    object-fit: cover;
+    vertical-align: middle;
+    max-width: 1000px;
+}
+
+.learnmorebtn{
+    padding: 30px;
+    font-size: 30px;
+    color: #f7efda;
+    background-color: #733015;
+    text-align: center;
+    border: none;
+}
+
+
