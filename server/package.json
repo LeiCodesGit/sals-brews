@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "M2 CPE143L Final Project - A Cafe Website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm test",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeiCodesGit/sals-brews.git"
+  },
+  "keywords": [
+    "cafe",
+    "coffee",
+    "tea",
+    "website",
+    "pastry"
+  ],
+  "author": "Leah Rouse L. Cruzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeiCodesGit/sals-brews/issues"
+  },
+  "homepage": "https://github.com/LeiCodesGit/sals-brews#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
