@@ -23,7 +23,7 @@ body {
     margin-bottom: 10px;
 }
 
-#create-acc p {
+#create-acc {
     font-weight: bolder;
     font-size: 24px;
 }
@@ -76,4 +76,19 @@ body {
 #create-acc button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
+}
+
+#back-to-login {
+    font-size: 14px;
+    font-style: italic;
+}
+
+#back-to-login a {
+    text-decoration: none;
+    color: #9d9168;
+}
+
+#back-to-login a:hover {
+    color: #ffff;
+    text-decoration: underline;
 }
