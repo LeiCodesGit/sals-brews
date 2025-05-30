@@ -8,24 +8,26 @@
     <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
 </head>
 <body>
-    <form action="">
+    <form id="register-form">
         <div id="create-acc">
             <img src="../assets/SBLogoLight.png" alt="SBLogoLight">
-            <p>CREATE YOUR ACCOUNT:</p>
+            <p id="create-acc">CREATE YOUR ACCOUNT:</p>
             <div id="user-info">
                 <div id="container-1">
-                    <input type="text" name="first-name" id="first-name" placeholder="First Name">
-                    <input type="text" name="last-name" id="last-name" placeholder="Last Name">
-                    <input type="text" name="username" id="username" placeholder="Username">
+                    <input type="text" name="first-name" id="first-name" placeholder="First Name" required>
+                    <input type="text" name="last-name" id="last-name" placeholder="Last Name" required>
+                    <input type="text" name="username" id="username" placeholder="Username" required>
                 </div>
                 <div id="container-2">
-                    <input type="tel" name="contact-number" id="contact-number" placeholder="Contact Number">
-                    <input type="email" name="email" id="email" placeholder="Email">
-                    <input type="text" name="address" id="address" placeholder="address">
+                    <input type="tel" name="contact-number" id="contact-number" placeholder="Contact Number" required>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="text" name="address" id="address" placeholder="address" required>
                 </div>
             </div>
             <button type="submit">REGISTER</button>
+            <p id="back-to-login">Already have an account? <a href="login.html">click here</a></p>
         </div>
     </form>
 </body>
+    <script src="../scripts/registerScript.js"></script>
 </html>
