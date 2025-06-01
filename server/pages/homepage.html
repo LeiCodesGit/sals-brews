@@ -4,33 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sal's Brews</title>
-    <link rel="stylesheet" href="../styles/homepageStyles.css">
-    
 
+    <!--custom fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="../styles/homepage.css">
 </head>
 <body>
-   <div class="navbar">
-        <div><img src="../assets/SBLogoLight.png" height ="100px" width="100px"></div>
-            <div class="salsHeader">
-                <header class="salsHeader">
-                    <a class="salsLink" href="">HOME</a>
-                    <a class="salsLink" href="">MENU</a>
-                    <a class="salsLink" href="">ABOUT US</a>
-                    <a class="cart" href=""><img src="../assets/cart.png" height="28px" width="28px"></a>   
-                </header>
-            </div>
-   </div>
-        <div class="homepage">
-                <div class="homepagePhoto">
-                    <img src="../assets/coffeehome.png" height="700px" width="1000px" class="coffeehome">
-                </div>
-                <div class="homepageText">
-                    <h1 class="hp1">SAL'S BREWS</h1>
-                    <p class="php1">
-                    "A cozy café serving handcrafted coffee, fresh pastries, and warm vibes—perfect for your daily pick-me-up or a relaxing break." 
-                    </p>
-                </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><img src="../assets/SBhomeLogo.png"></div>
+        <div class="salsHeader">
+            <header class="salsHeader">
+                <a class="salsLink" href="">Home</a>
+                <a class="salsLink" href="">Menu</a>
+                <a class="salsLink" href="">Contact Us</a>
+                <a class="cart" href=""><img src="../assets/shoppingCart.png" height="28px" width="28px"></a>   
+            </header>
         </div>
-    </div> 
+    </div>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <img src="../assets/SBbackgroundIntro.png" alt="Intro Background" class="intro-img">
+        <div class="intro-content">
+            <img src="../assets/SBLogoLight.png" alt="Logo">
+            <h2>"A cozy café serving handcrafted coffee, fresh pastries, and warm vibes—perfect for your daily pick-me-up or a relaxing break."</h2>
+            <div class="socials">
+                <a class="socialsLink" href="https://www.facebook.com/"><img src="../assets/facebook.png" alt="Facebook Icon"></a>
+                <a class="socialsLink" href="https://www.instagram.com/"><img src="../assets/instagram.png" alt="Instagram Icon"></a>
+                <a class="socialsLink" href="https://maps.app.goo.gl/QytMACYMGZeS2e4S7"><img src="../assets/map.png" alt="Google Maps Icon"></a>
+            </div>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2 class="menu-title">MENU</h2>
+
+        <!-- Best Sellers -->
+        <div class="best-sellers">
+            <h3>Best Sellers</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <img src="../assets/cafemocha.png" alt="Cafe Mocha">
+                    <p>Café Mocha</p>
+                    <p>₱160</p>
+                    <button class="buy-btn">BUY NOW</button>
+                </div>
+                <div class="menu-item">
+                    <img src="../assets/spanishlatte.png" alt="Spanish Latte">
+                    <p>Spanish Latte</p>
+                    <p>₱140</p>
+                    <button class="buy-btn">BUY NOW</button>
+                </div>
+                <div class="menu-item">
+                    <img src="../assets/matchalatte.png" alt="Matcha Latte">
+                    <p>Matcha Latte</p>
+                    <p>₱160</p>
+                    <button class="buy-btn">BUY NOW</button>
+                </div>
+                <div class="menu-item">
+                    <img src="../assets/panachoco.png" alt="Pain au Chocolat">
+                    <p>Pain au Chocolat</p>
+                    <p>₱80</p>
+                    <button class="buy-btn">BUY NOW</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="menu-categories">
+            <div class="tabs">
+                <span class="tab active">Coffee</span>
+                <span class="tab">Non-Coffee</span>
+                <span class="tab">Matcha</span>
+                <span class="tab">Pastries</span>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item"><img src="../assets/cafemocha.png"><p>Café Mocha</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/.png"><p>2</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/.png"><p>3</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/.png"><p>4</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/.png"><p>5</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/.png"><p>6</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
+
+
+
+
