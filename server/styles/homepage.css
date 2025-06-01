@@ -1,75 +1,192 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     background: #452e1e;
 }
+
+/* Navbar */
 .navbar {
-    background: #733015;
+    font-family: "Bricolage Grotesque", sans-serif;
+    background: #cbb897;
     color: #f7efda;
     padding: 20px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.salsHeader{
-    background: #733015;
-    color: #f7efda;
-}
 
-.salsLink{
-    display: inline-block;
-    text-decoration: none;
-    color: #f7efda;
-    font-size: 25px;
-    font-weight: bold;
-    margin-right: 25px;
+.salsHeader {
+    display: flex;
     align-items: center;
+    gap: 30px;
 }
 
-.hp1{
-    padding-top: 40px;
-    color: #f7efda;
-    font-size: 80px;
-    max-width: 1000px;
-    white-space: nowrap;
+.salsLink {
+    text-decoration: none;
+    color: #452e1e;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-.php1{
-    color: #f7efda;
-    font-size: 40px;
-    margin-top: 20px;
+.salsLink:hover {
+    color: #47532b;
+    font-size: 21px;
+    border-bottom: 2px solid #47532b;
+    transform: scale(1.05);
 }
 
-.homepage {
-   padding: 0 40px;
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: space-around;
-   gap: 20px;
-   max-width: 400px;
+.menu-icon {
+    display: inline-block;
 }
 
-.homepageText{
-    flex: 1;
-}
-.coffeehome{
-    object-fit: cover;
-    vertical-align: middle;
-    max-width: 1000px;
-}
-
-.learnmorebtn{
-    padding: 30px;
-    font-size: 30px;
-    color: #f7efda;
-    background-color: #733015;
+/* Intro Section */
+.intro-section {
+    font-family: "Lora", serif;
+    position: relative;
     text-align: center;
+    color: #f7efda;
+}
+
+.intro-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.intro-content {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 700px;
+}
+
+.intro-content h2 {
+    font-size: 24px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.intro-content img {
+    width: 200px;
+}
+
+.socials img {
+    width: 32px;
+    margin: 0 10px;
+}
+
+.order-btn {
+    padding: 12px 30px;
+    margin-top: 20px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #47532b;
+    color: #f7efda;
     border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.order-btn:hover {
+    background-color: #f7efda;
+    color: #47532b;
+    transform: scale(1.05);
+}
+
+/* Menu Section */
+.menu-section {
+    background: #cbb897;
+    font-family: "Bricolage Grotesque", sans-serif;
+    padding: 40px 20px;
+    text-align: center;
+    color: #3c2415;
+}
+
+.menu-title {
+    font-family: "Lora", serif;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.best-sellers h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #47532b;
+    text-align: start;
+    margin-left: 30px;
+}
+
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.menu-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    width: 160px;
+    text-align: center;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ccc;
+}
+
+.buy-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #733015;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0 20px;
+}
+
+.tab {
+    font-weight: bold;
+    cursor: pointer;
+    color: #733015;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+}
+
+.tab:hover {
+    color: #47532b;
+    font-size: 19px;
+    border-bottom: 2px solid #47532b;
+    transform: scale(1.05);
+}
+
+.tab.active {
+    border-bottom: 2px solid #733015;
+}
+
+.tab.active:hover {
+    border-bottom:2px solid #47532b;
 }
 
 
