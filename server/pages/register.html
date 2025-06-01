@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sal's Brews</title>
-    <link rel="stylesheet" href="../css/registerStyles.css">
+    <link rel="stylesheet" href="../styles/registerStyles.css">
     <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
 </head>
 <body>
     <form id="register-form">
         <div id="create-acc">
             <img src="../assets/SBLogoLight.png" alt="SBLogoLight">
-            <p id="create-acc">CREATE YOUR ACCOUNT:</p>
+            <p id="create-acc-label">CREATE YOUR ACCOUNT:</p>
             <div id="user-info">
                 <div id="container-1">
                     <input type="text" name="first-name" id="first-name" placeholder="First Name" required>
                     <input type="text" name="last-name" id="last-name" placeholder="Last Name" required>
                     <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
                 </div>
                 <div id="container-2">
+                    <input type="password" name="con-pass" id="con-pass" placeholder="Confirm Password" required>
                     <input type="tel" name="contact-number" id="contact-number" placeholder="Contact Number" required>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                    <input type="text" name="address" id="address" placeholder="address" required>
+                    <input type="number" name="age" id="age" placeholder="Age" min="0">
+                    <input type="text" name="address" id="address" placeholder="Address" required>
                 </div>
             </div>
             <button type="submit">REGISTER</button>
