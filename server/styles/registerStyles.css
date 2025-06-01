@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
 }
 
 body {
@@ -23,26 +22,6 @@ body {
     text-align: center;
     color: #f7efda;
     font-family: "Bricolage Grotesque", sans-serif;
-=======
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #452e1e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 100vh;
-    padding: 20px;
-}
-
-#create-acc {
-    margin-top: 30px;
-    text-align: center;
-    color: #f7efda;
-    font-family: Arial, sans-serif;
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
 }
 
 #create-acc img {
@@ -51,17 +30,12 @@ body {
     margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
 #create-acc {
-=======
-#create-acc-label {
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
     font-weight: bolder;
     font-size: 24px;
 }
 
 #user-info {
-<<<<<<< HEAD
     background-color: rgb(115, 48, 21, 0.6);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -77,54 +51,19 @@ body {
     color: #452e1e;
     border-radius: 8px;
     border: none;
-=======
-    background-color: #733015;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    padding: 50px;
-    border-radius: 10px;
-    gap: 20px;
-    justify-content: center;
-
-    width: 100%;
-    max-width: 700px;
-
-    margin-left: auto;
-    margin-right: auto;
-}
-#user-info input {
-    margin: 10px 0;
-    padding: 12px;
-    font-size: 16px;
-    color: #452e1e;
-    border-radius: 8px;
-    border: none;
-
-    width: 100%;
-    max-width: 300px;
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
 }
 
 #user-info input:focus {
     border-color: #452e1e;
-<<<<<<< HEAD
 }
 
 #container-1 {
-=======
-    outline: none;
-}
-
-#container-1, #container-2 {
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
     margin: 0 10px;
     display: flex;
     flex-direction: column;
     
 }
 
-<<<<<<< HEAD
 #container-2 {
     margin: 0 10px;
     display: flex;
@@ -141,20 +80,6 @@ body {
     border-radius: 100px;
     border: none;
     cursor: pointer;
-=======
-#create-acc button{
-    margin: 30px auto;
-    padding: 12px 24px;
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffff;
-    background-color: #53443b;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-
-    transition: all 0.3s ease;
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
 }
 
 #create-acc button:hover {
@@ -165,10 +90,6 @@ body {
 #back-to-login {
     font-size: 14px;
     font-style: italic;
-<<<<<<< HEAD
-=======
-    margin-top: 10px;
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
 }
 
 #back-to-login a {
@@ -181,10 +102,6 @@ body {
     text-decoration: underline;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5e6f4426ffa40c712dfe7180c4cab810ba983394
 /* For Responsive */
 @media (max-width: 768px) {
     #user-info {
