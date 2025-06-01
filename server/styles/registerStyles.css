@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #452e1e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#create-acc {
+    margin-top: 30px;
+    text-align: center;
+    color: #f7efda;
+    font-family: Arial, sans-serif;
+}
+
+#create-acc img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+#create-acc-label {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+#user-info {
+    background-color: #733015;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    padding: 50px;
+    border-radius: 10px;
+    gap: 20px;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 700px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+#user-info input {
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 16px;
+    color: #452e1e;
+    border-radius: 8px;
+    border: none;
+
+    width: 100%;
+    max-width: 300px;
+}
+
+#user-info input:focus {
+    border-color: #452e1e;
+    outline: none;
+}
+
+#container-1, #container-2 {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#create-acc button{
+    margin: 30px auto;
+    padding: 12px 24px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffff;
+    background-color: #53443b;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+#create-acc button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+#back-to-login {
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+#back-to-login a {
+    text-decoration: none;
+    color: #9d9168;
+}
+
+#back-to-login a:hover {
+    color: #ffff;
+    text-decoration: underline;
+}
+
+
+/* For Responsive */
+@media (max-width: 768px) {
+    #user-info {
+        flex-direction: column;
+        padding: 20px;
+        gap: 0;
+    }
+
+    #create-acc {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    #create-acc img {
+        width: 100px;
+        height: 100px;
+    }
+
+    #create-acc button {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #user-info input {
+        max-width: 100%;
+    }
+
+    #create-acc {
+        font-size: 18px;
+    }
+
+    #create-acc button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
