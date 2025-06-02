@@ -132,12 +132,13 @@ body {
 }
 
 .menu-item {
-    background-color: #fff;
+    background-color: #3c2415;
     padding: 15px;
     border-radius: 12px;
     width: 160px;
     text-align: center;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    color: #e9ddca;
 }
 
 .menu-item img {
