@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sal's Brews</title>
+    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
+
+    <!-- Custom fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/itempageStyles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><img src="../assets/SBhomeLogo.png" alt="Sal's Brews Logo"></div>
+        <div class="salsHeader">
+            <header class="salsHeader">
+                <a class="salsLink" href="#">Home</a>
+                <a class="salsLink" href="#">Menu</a>
+                <a class="salsLink" href="#">Contact Us</a>
+                <a class="cart" href="#"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #47532b;"></i></a>
+                <a class="humburger" href="#"><i class="fa-solid fa-bars fa-2xl" style="color: #452e1e;"></i></a>
+            </header>
+        </div>
+    </div>
+
+    <!-- Item Section -->
+    <div class="item-page">
+        <div class="item-image">
+            <img src="../assets/mocha.png" alt="Cafe Mocha">
+        </div>
+
+        <div class="item-details">
+            <h2>CAFE MOCHA</h2>
+            <p class="price">₱140.00</p>
+
+            <div class="options">
+                <p>Choice of:</p>
+                <div class="option-group" data-group="temperature">
+                    <button>Hot</button>
+                    <button>Iced</button>
+                </div>
+
+                <p>Sweetness Level :</p>
+                <div class="option-group" data-group="sweetness">
+                    <button>50%</button>
+                    <button>75%</button>
+                    <button>Normal</button>
+                </div>
+
+                <p>Size Options:</p>
+                <div class="option-group" data-group="size">
+                    <button>12 oz</button>
+                    <button>14 oz</button>
+                    <button>16 oz</button>
+                </div>
+
+                <p>Add-ons:</p>
+                <div class="option-group" data-group="addons">
+                    <button>Espresso</button>
+                    <button>Sub Oat</button>
+                    <button>None</button>
+                </div>
+            </div>
+
+             <div class="note-section">
+                <label for="orderNote">Note to Cafe (Optional):</label><br>
+                <textarea id="orderNote" name="orderNote" rows="4" placeholder="E.g. Less ice..."></textarea>
+            </div>
+
+            <div class="quantity">
+                <p>Quantity:</p>
+                <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+                <span class="qty-value" id="quantityValue">1</span>
+                <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="cancel-btn" onclick="cancelSelection()">Cancel</button>
+            </div>
+    </div>
+</div>
+
+    <!-- Script -->
+    <script>
+        let quantity = 1;
+
+        function updateQuantity(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            document.getElementById("quantityValue").textContent = quantity;
+        }
+
+        // Selection logic for button groups
+        document.querySelectorAll('.option-group').forEach(group => {
+            group.addEventListener('click', function (e) {
+                if (e.target.tagName === 'BUTTON') {
+                    [...group.children].forEach(btn => btn.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+            });
+        });
+
+        function cancelSelection() {
+            // Reset quantity
+            quantity = 1;
+            document.getElementById("quantityValue").textContent = quantity;
+
+            // Remove all selected classes
+            document.querySelectorAll('.option-group button').forEach(btn => {
+                btn.classList.remove('selected'); 
+            });
+        }
+
+    </script>
+</body>
+</html>
+
