@@ -9,8 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
    
-    <link rel="stylesheet" href="../styles/homepage.css">
+    <link rel="stylesheet" href="../styles/homepageStyles.css">
+    <script src="../scripts/homepageScript.js" defer></script>
 </head>
 <body>
 
@@ -51,27 +53,27 @@
             <h3>Best Sellers</h3>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <img src="../assets/cafemocha.png" alt="Cafe Mocha">
+                    <img src="../assets/mocha.png" alt="Cafe Mocha">
                     <p>Café Mocha</p>
-                    <p>₱160</p>
+                    <p style="padding-top: 18px;">₱160</p>
                     <button class="buy-btn">BUY NOW</button>
                 </div>
                 <div class="menu-item">
                     <img src="../assets/spanishlatte.png" alt="Spanish Latte">
                     <p>Spanish Latte</p>
-                    <p>₱140</p>
+                    <p style="padding-top: 18px;">₱140</p>
                     <button class="buy-btn">BUY NOW</button>
                 </div>
                 <div class="menu-item">
                     <img src="../assets/matchalatte.png" alt="Matcha Latte">
-                    <p>Matcha Latte</p>
+                    <p>Cerimonial Matcha Latte</p>
                     <p>₱160</p>
                     <button class="buy-btn">BUY NOW</button>
                 </div>
                 <div class="menu-item">
-                    <img src="../assets/panachoco.png" alt="Pain au Chocolat">
+                    <img src="../assets/panau.png" alt="Pain au Chocolat">
                     <p>Pain au Chocolat</p>
-                    <p>₱80</p>
+                    <p style="padding-top: 18px;">₱80</p>
                     <button class="buy-btn">BUY NOW</button>
                 </div>
             </div>
@@ -82,21 +84,58 @@
             <div class="tabs">
                 <span class="tab active">Coffee</span>
                 <span class="tab">Non-Coffee</span>
-                <span class="tab">Matcha</span>
                 <span class="tab">Pastries</span>
             </div>
-            <div class="menu-grid">
-                <div class="menu-item"><img src="../assets/cafemocha.png"><p>Café Mocha</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
-                <div class="menu-item"><img src="../assets/.png"><p>2</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
-                <div class="menu-item"><img src="../assets/.png"><p>3</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
-                <div class="menu-item"><img src="../assets/.png"><p>4</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
-                <div class="menu-item"><img src="../assets/.png"><p>5</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
-                <div class="menu-item"><img src="../assets/.png"><p>6</p><p>₱160</p><button class="buy-btn">BUY NOW</button></div>
+
+            <div class="menu-grid" id="coffee">
+
+                <!--buttonleft-->
+                <div class="arrowbtn2" onclick="prevCategory()">
+                <img src="../assets/arrowbtnleft.png" width="120px" height="120px" alt="Scroll Right"></div>
+    
+                <div class="menu-item"><img src="../assets/americano.png"><p>Americano</p><p style="padding-top: 18px;">₱120</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/cafelatte.png"><p>Cafe Latte</p><p style="padding-top: 18px;">₱140</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/spanishlatte.png"><p>Spanish Latte</p><p style="padding-top: 18px;">₱150</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/mocha.png"><p>Caffe Mocha</p><p style="padding-top: 18px;">₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/dirtymatcha.png"><p>Dirty Matcha</p><p style="padding-top: 18px;">₱175</p><button class="buy-btn">BUY NOW</button></div>
+                <div class="menu-item"><img src="../assets/caramel macchiato.png"><p>Caramel Macchiato</p><p >₱160</p><button class="buy-btn">BUY NOW</button></div>
+                <!--buttonright-->
+                <div class="arrowbtn" onclick="followingCategory()">
+                <img src="../assets/arrowbtn.png" width="120px" height="120px" alt="Scroll Right"></div>
             </div>
+
+                <div class="menu-grid-noncoffee hidden" id="non-coffee">
+                    <div class="arrowbtn2" onclick="prevCategory()">
+                <img src="../assets/arrowbtnleft.png" width="120px" height="120px" alt="Scroll Right"></div>
+                    <div class="menu-item"><img src="../assets/honeyicedtea.png"><p>Honey Iced Tea</p><p style="padding-top: 18px;">₱180</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/chailatte.png"><p>Chai Latte</p><p style="padding-top: 18px;">₱170</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/strawberrymatcha.png"><p>Strawberry Matcha Latte</p><p>₱210</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/matchalatte.png"><p>Cerimonial Matcha Latte</p><p>₱190</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="arrowbtn" onclick="followingCategory()">
+                <img src="../assets/arrowbtn.png" width="120px" height="120px" alt="Scroll Right"></div>
+                </div>
+
+                <div class="menu-grid-pastries hidden" id="pastries">
+                    <div class="arrowbtn2" onclick="prevCategory()">
+                <img src="../assets/arrowbtnleft.png" width="120px" height="120px" alt="Scroll Right"></div>
+                    <div class="menu-item"><img src="../assets/redvelvet.png"><p>Red Velvet Cookie</p><p >₱90</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/chocolatechip.png"><p>Chocolate Chip Cookie</p><p>₱90</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/croissant.png"><p>Croissant</p><p style="padding-top: 18px;">₱180</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/panau.png"><p>Pan au Chocolat</p><p style="padding-top: 18px;">₱200</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="menu-item"><img src="../assets/cinnamonroll.png"><p>Cinnamon Roll</p><p style="padding-top: 18px;">₱150</p><button class="buy-btn">BUY NOW</button></div>
+                    <div class="arrowbtn" onclick="followingCategory()">
+                <img src="../assets/arrowbtn.png" width="120px" height="120px" alt="Scroll Right"></div>
+                </div>
+            
+        
         </div>
     </section>
 
+
+
+
 </body>
+
 </html>
 
 

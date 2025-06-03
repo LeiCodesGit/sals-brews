@@ -128,16 +128,36 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-grid-noncoffee {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-grid-pastries {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
     justify-content: center;
 }
 
 .menu-item {
-    background-color: #fff;
+    background-color: #3c2415;
     padding: 15px;
     border-radius: 12px;
     width: 160px;
     text-align: center;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    color: #e9ddca;
 }
 
 .menu-item img {
@@ -147,6 +167,10 @@ body {
     background: #ccc;
 }
 
+.menu-item img:hover {
+    transform: scale(1.07);
+    transition: all 0.3s ease;
+}
 .buy-btn {
     margin-top: 10px;
     padding: 8px 16px;
@@ -187,4 +211,36 @@ body {
 
 .tab.active:hover {
     border-bottom:2px solid #47532b;
+}
+
+.arrowbtn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #733015;
+    transition: all 0.3s ease;
+    display: flex;
+    float: right;
+    align-items: center;
+}
+
+.arrowbtn2{
+ background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #733015;
+    transition: all 0.3s ease;
+    display: flex;
+    float: left;
+    align-items: center;
+}
+
+.arrowbtn:hover, .arrowbtn2:hover {
+    transform: scale(1.25);
+}
+
+.hidden {
+    display: none;
 }
