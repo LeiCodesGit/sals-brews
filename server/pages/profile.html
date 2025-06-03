@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--For Icons-->
+    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sal's Brews</title>
+    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
+
+    <!--custom fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/profileStyles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><img src="../assets/SBhomeLogo.png"></div>
+        <div class="salsHeader">
+            <header class="salsHeader">
+                <a class="salsLink" href="">Home</a>
+                <a class="salsLink" href="">Menu</a>
+                <a class="salsLink" href="">Contact Us</a>
+                <a class="cart" href=""><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #47532b;"></i></a>   
+                <a class="humburger" href=""><i class="fa-solid fa-bars fa-2xl" style="color: #452e1e;"></i></a>   
+            </header>
+        </div>
+    </div>
+
+    <div id="user-profile">
+        <h1>USER PROFILE</h1>
+        <div id="user-content">
+            <div class="container">
+                <div class="user-info">
+                    <label for="full-name">Full Name:</label>
+                    <input type="text" name="full-name" id="full-name" placeholder="" readonly>
+                </div>
+                <div class="user-info">
+                    <label for="age">Age:</label>
+                    <input type="number" name="age" id="age" placeholder="" min="0" readonly>
+                </div>
+                <div class="user-info">
+                    <label for="address">Address:</label>
+                    <input type="text" name="address" id="address" placeholder="" readonly>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="user-info">
+                    <label for="contact-number">Contact Number:</label>
+                    <input type="tel" name="contact-number" id="contact-number" placeholder="" readonly>
+                </div>
+                <div class="user-info">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email id="email" placeholder="" readonly>
+                </div>
+                <div class="user-info">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" placeholder="" readonly>
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+            <button id="edit-profile">EDIT PROFILE</button>
+            <button id="cancel-edit">CANCEL EDIT</button>
+        </div>
+    </div>
+    
+    <div id="orders">
+        <h2>ORDERS</h2>
+        <div id="select">
+            <a href="#">Ongoing</a>
+            <a href="#">History</a>
+        </div>
+
+        <div id="table">
+            <table>
+                <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 15%;">
+                    <col style="width: 20%;">
+                    <col style="width: 30%;">
+                    <col style="width: 10%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Total</th>
+                        <th><i class="fa-solid fa-mug-saucer"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td><a href="">view order</a></td>
+                    </tr>
+                    <tr>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td>sample</td>
+                        <td><a href="">view order</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
