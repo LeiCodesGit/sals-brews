@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #cbb897;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navbar */
+.navbar {
+    font-family: "Bricolage Grotesque", sans-serif;
+    background: #cbb897;
+    color: #f7efda;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.salsHeader {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.salsLink {
+    text-decoration: none;
+    color: #452e1e;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.salsLink:hover {
+    color: #47532b;
+    font-size: 21px;
+    border-bottom: 2px solid #47532b;
+    transform: scale(1.05);
+}
+
+/* end Navbar */
+
+/*user-profile*/
+
+#user-profile {
+    font-family: "Bricolage Grotesque", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user-profile h1{
+    font-family: "Lora", serif;
+    color: #452e1e;
+    font-weight: bolder;
+    text-align: center;
+}
+
+#user-content {
+    display: flex;
+}
+
+.container {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.user-info input {
+    margin: 10px;
+    padding: 5px;
+    font-size: 14px;
+    color: #452e1e;
+    border-radius: 8px;
+    border: none;
+}
+
+.user-info input:focus {
+    border-color: #452e1e;
+}
+
+.user-info label {
+    font-size: 16px;
+    color: #47532b;
+    font-weight: bold;
+}
+
+#buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px
+}
+
+#edit-profile, #cancel-edit {
+    padding: 10px 15px;
+    color: #ffff;
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 20px;
+    border: none;
+}
+
+#edit-profile {
+    background-color: #47532b;
+}
+
+#cancel-edit {
+    background-color: #452e1e;
+}
+
+/* end user-profile*/
+
+/*orders*/
+#orders {
+    background-color: #845a2d;
+    color: #ffff;
+    font-family: "Bricolage Grotesque", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 100px;
+    border-radius: 20px;
+}
+
+#orders h2 {
+    margin: 10px 0px;
+    font-family: "Lora", serif;
+    font-weight: bolder;
+}
+
+#select {
+    display: flex;
+    gap: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding-bottom: 10px;
+}
+
+#select a {
+    text-decoration: none;
+    color: #e9d2a8;
+}
+
+#select a:hover {
+    text-decoration: underline;
+    color: #47532b;
+    text-underline-offset: 8px;
+}
+
+#table {
+    background-color: #c08444;
+    width: 90%;
+    table-layout: fixed;
+    margin: 0 auto 40px auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-bottom: 2px solid #e9d2a8;
+}
+
+th {
+    text-align: center;
+    padding: 10px;
+    color: #ffff;
+    word-wrap: break-word;
+    font-size: 16px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+
+thead tr {
+    border-bottom: 2px solid #e9d2a8;
+}
+
+
+td {
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+    color: #e9d2a8;
+    word-wrap: break-word;
+    font-size: 16px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+table a {
+    color: #47532b;
+    text-underline-offset: 4px;
+}
+
+table a:hover {
+    color: #ffff;
+}
