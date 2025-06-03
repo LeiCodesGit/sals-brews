@@ -55,6 +55,12 @@ body {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.item-image img:hover {
+    transform: scale(1.05);
+    background-color: #755036;
 }
 
 .item-details {
@@ -96,6 +102,7 @@ body {
     cursor: pointer;
     font-family: "Bricolage Grotesque", sans-serif;
     transition: all 0.2s ease;
+    border-radius: 0; /* No rounded edges */
 }
 
 .option-group button:hover,
@@ -104,7 +111,7 @@ body {
 }
 
 .option-group button.selected {
-    border: 4px solid #452e1e; 
+    border: 4px solid #452e1e;
     background-color: #d4be96;
 }
 
@@ -142,24 +149,28 @@ body {
 .action-buttons {
     margin-top: 20px;
     display: flex;
+    flex-wrap: nowrap;
     gap: 15px;
+    justify-content: flex-start;
 }
 
-/* Shared style for both buttons */
-.action-buttons button {
+.action-buttons button,
+.action-buttons a {
     padding: 12px 24px;
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bold;
     font-size: 16px;
     border: none;
-    border-radius: 25px;
-    min-width: 160px; 
+    min-width: 160px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 25px;
 }
 
-/* Individual button colors */
+/* Add to Cart button */
 .add-to-cart {
     background-color: #47532b;
     color: #fff;
@@ -169,15 +180,23 @@ body {
     background-color: #374122;
 }
 
+/* Cancel button */
 .cancel-btn {
     background-color: #c05252;
     color: #fff;
-    border: none;
 }
 
 .cancel-btn:hover {
     background-color: #9e3d3d;
 }
 
+/* Reset button */
+.reset-btn {
+    background-color: #757575;
+    color: #fff;
+    border: none;
+}
 
-
+.reset-btn:hover {
+    background-color: #5a5a5a;
+}

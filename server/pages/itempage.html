@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-             <div class="note-section">
+            <div class="note-section">
                 <label for="orderNote">Note to Cafe (Optional):</label><br>
                 <textarea id="orderNote" name="orderNote" rows="4" placeholder="E.g. Less ice..."></textarea>
             </div>
@@ -84,10 +84,11 @@
 
             <div class="action-buttons">
                 <button class="add-to-cart">Add to Cart</button>
-                <button class="cancel-btn" onclick="cancelSelection()">Cancel</button>
+                <button class="reset-btn" onclick="resetForm()">Reset</button>
+                <a href="homepage.html" class="cancel-btn">Cancel</a>
             </div>
+        </div>
     </div>
-</div>
 
     <!-- Script -->
     <script>
@@ -109,18 +110,19 @@
             });
         });
 
-        function cancelSelection() {
+        function resetForm() {
             // Reset quantity
             quantity = 1;
             document.getElementById("quantityValue").textContent = quantity;
 
-            // Remove all selected classes
+            // Remove all selected option buttons
             document.querySelectorAll('.option-group button').forEach(btn => {
-                btn.classList.remove('selected'); 
+                btn.classList.remove('selected');
             });
-        }
 
+            // Clear note
+            document.getElementById("orderNote").value = "";
+        }
     </script>
 </body>
 </html>
-
