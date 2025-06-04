@@ -65,7 +65,43 @@ body {
     border-radius: 5px;
 }
 
-#itemImage {
+.itemDescription {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #f7efda;
+;
+}
+
+.itemDescription img {
     width: 100px;
     height: 100px;
+    object-fit: contain;
+}
+
+.yourOrder {
+    font-size: 30px;
+    color: #f7efda;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.itemDetails {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.itemDetails img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+#itemName{
+    font-size: 20px;
+    color: #f7efda;
 }
