@@ -4,6 +4,7 @@
   "description": "M2 CPE143L Final Project - A Cafe Website",
   "main": "index.js",
   "type": "module",
+  
   "scripts": {
     "test": "npm test",
     "start": "nodemon index.js"
