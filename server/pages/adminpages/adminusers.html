@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Accounts | Sal's Brews</title>
+  <link rel="stylesheet" href="../../styles/adminstyles/adminuserstyles.css" />
+
+  <!-- Custom Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../../assets/SBhomeLogo.png" alt="Sal's Brews Logo" />
+    </div>
+    <div class="nav">
+      <a href="adminmenu.html" class="tab-link">Menu</a>
+      <a href="adminorders.html" class="tab-link">Orders</a>
+      <a href="adminfeedback.html" class="tab-link">Feedback</a>
+      <a href="adminusers.html" class="tab-link">User Accounts</a>
+    </div>
+    <button class="signout">SIGN OUT</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="tab-header">Manage User Accounts</div>
+
+    <!-- User Form -->
+    <form class="user-form">
+      <input type="text" placeholder="First Name" required />
+      <input type="text" placeholder="Last Name" required />
+      <input type="email" placeholder="Email / Username" required />
+      <input type="password" placeholder="Password" />
+      <input type="password" placeholder="Confirm Password" />
+      <input type="text" placeholder="Contact Number" />
+      <input type="number" placeholder="Age" min="18" />
+      <input type="text" placeholder="Address" />
+      <button type="submit" class="save-btn">SAVE CHANGES</button>
+    </form>
+
+    <!-- Registered Users Table -->
+    <div class="user-list">
+      <h3>Registered Users</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Age</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jane Doe</td>
+            <td>jane@example.com</td>
+            <td>09171234567</td>
+            <td>21</td>
+            <td><button>Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
