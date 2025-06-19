@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/LeiCodesGit/sals-brews#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
     "express": "^5.1.0"
   },
   "devDependencies": {
