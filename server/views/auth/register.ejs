@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/registerStyles.css">
+
+</head>
+<body>
+    <form id="register-form">
+        <div id="create-acc">
+            <img src="../assets/SBLogoLight.png" alt="SBLogoLight">
+            <p id="create-acc-label">CREATE YOUR ACCOUNT:</p>
+            <div id="user-info">
+                <div id="container-1">
+                    <input type="text" name="first-name" id="first-name" placeholder="First Name" required>
+                    <input type="text" name="last-name" id="last-name" placeholder="Last Name" required>
+                    <input type="text" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                </div>
+                <div id="container-2">
+                    <input type="password" name="con-pass" id="con-pass" placeholder="Confirm Password" required>
+                    <input type="tel" name="contact-number" id="contact-number" placeholder="Contact Number" required>
+                    <input type="number" name="age" id="age" placeholder="Age" min="0" required>
+                    <input type="text" name="address" id="address" placeholder="Address" required>
+                </div>
+            </div>
+            <button type="submit">REGISTER</button>
+            <p id="back-to-login">Already have an account? <a href="/auth/login">click here</a></p>
+        </div>
+    </form>
+</body>
+    <script src="../scripts/registerScript.js"></script>
+</html>
