@@ -1,0 +1,157 @@
+/* Body and Layout */
+body {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: #fffaf0;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #d4b48c;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.logo img {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.nav {
+  width: 100%;
+  padding-top: 20px; 
+  box-sizing: border-box;
+}
+
+.nav .tab-link {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+  background: #d4b48c;
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+}
+
+.nav .tab-link:hover {
+  background: linear-gradient(to right, #e5d0b4, #b29575);
+  color: #000;
+}
+
+.signout {
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 1rem;
+  background-color: #3c2f2f;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  margin-left: 200px; 
+}
+
+
+.tab-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: #3c2f2f;
+}
+
+.user-form {
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.user-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: 'Lora', serif;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff8ec;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background-color: #7a5c40;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.save-btn:hover {
+  background-color: #5c3b23;
+}
+
+/* User List Table */
+.user-list {
+  margin-top: 2rem;
+}
+
+.user-list h3 {
+  font-size: 18px;
+  color: #5c3b23;
+  margin-bottom: 0.5rem;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff5e1;
+  border: 1px solid #d6b88c;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.user-list th,
+.user-list td {
+  padding: 12px;
+  border-bottom: 1px solid #d6b88c;
+  text-align: left;
+  font-family: 'Lora', serif;
+}
+
+.user-list th {
+  background-color: #b29575;
+  color: white;
+}
+
+.user-list td button {
+  padding: 5px 10px;
+  background-color: #7a5c40;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+.user-list td button:hover {
+  background-color: #5c3b23;
+}
