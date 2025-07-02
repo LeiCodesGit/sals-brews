@@ -28,6 +28,7 @@ body {
 .nav {
   width: 100%;
   padding-top: 20px;
+  box-sizing: border-box;
 }
 
 .nav .tab-link {
@@ -39,6 +40,7 @@ body {
   color: #fff;
   background: #d4b48c;
   transition: background 0.3s ease;
+  box-sizing: border-box;
 }
 
 .nav .tab-link:hover {
@@ -62,68 +64,66 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 2rem;
-  background: #fdf3dd;
+  background-color: #fdf3dd;
   overflow-y: auto;
 }
 
 .tab-header {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.add-item-btn {
   margin-bottom: 1.5rem;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 14px;
-  border: none;
-  background-color: #3c2f2f;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
+  color: #3c2f2f;
 }
 
-.user-list table {
+/* Table */
+.orders-table {
   width: 100%;
   border-collapse: collapse;
   background-color: #fff5e1;
   border: 1px solid #d6b88c;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
-.user-list th,
-.user-list td {
-  padding: 12px;
+.orders-table th,
+.orders-table td {
+  padding: 12px 16px;
   border-bottom: 1px solid #d6b88c;
   text-align: left;
-  font-family: 'Lora', serif;
+  font-family: "Lora", serif;
 }
 
-.user-list th {
+.orders-table th {
   background-color: #b29575;
   color: white;
+  font-weight: bold;
 }
 
-.user-list td button {
-  padding: 6px 12px;
-  background-color: #b64c4c;
+.orders-table tbody tr:hover {
+  background-color: #fbeedc;
+}
+
+/* View Button */
+.view-btn {
+  background-color: #3c2f2f;
   color: white;
+  padding: 6px 12px;
   border: none;
   border-radius: 6px;
+  font-size: 13px;
   cursor: pointer;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
-.user-list td button:hover {
-  background-color: #8b2d2d;
+.view-btn:hover {
+  background-color: #2b2323;
 }
 
 /* Modal */
 .modal {
   display: none;
   position: fixed;
-  z-index: 10;
+  z-index: 100;
   left: 0;
   top: 0;
   height: 100%;
@@ -137,7 +137,7 @@ body {
   background-color: #fff8ed;
   padding: 2rem;
   border-radius: 12px;
-  width: 500px;
+  width: 450px;
   max-height: 90%;
   overflow-y: auto;
   position: relative;
@@ -150,27 +150,14 @@ body {
   color: #3c2f2f;
 }
 
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-family: 'Lora', serif;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff8ec;
+.modal-content p {
+  margin: 0.8rem 0;
+  font-size: 14px;
+  color: #3c2f2f;
 }
 
-
-.submit-btn {
-  margin-top: 1rem;
-  padding: 10px;
-  font-weight: bold;
-  border: none;
-  background-color: #5c3b23;
-  color: white;
-  width: 100%;
-  border-radius: 10px;
-  cursor: pointer;
+.modal-content span {
+  font-weight: 600;
 }
 
 .close {
@@ -181,33 +168,4 @@ body {
   font-weight: bold;
   color: #444;
   cursor: pointer;
-}
-
-/* Pagination */
-.pagination {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.pagination button {
-  background-color: #3c2f2f;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.pagination button.active {
-  background-color: #b29575;
-}
-
-/* Error message */
-.error-message {
-  color: red;
-  font-size: 13px;
-  margin-top: 4px;
 }

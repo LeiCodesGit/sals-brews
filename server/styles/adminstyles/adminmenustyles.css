@@ -1,4 +1,3 @@
-/* Body and Layout */
 body {
   margin: 0;
   font-family: "Bricolage Grotesque", sans-serif;
@@ -235,6 +234,17 @@ body {
   cursor: pointer;
 }
 
+/* Add-on Group */
+.addon-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.addon-group input {
+  flex: 1;
+}
+
 .submit-btn {
   margin-top: 1.5rem;
   padding: 10px;
@@ -257,13 +267,3 @@ body {
   cursor: pointer;
 }
 
-/* Add-on Group */
-.addon-group {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.addon-group input {
-  flex: 1;
-}

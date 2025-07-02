@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Feedback | Sal's Brews</title>
+  <link rel="stylesheet" href="../../styles/adminstyles/adminfeedbackstyles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../../assets/SBhomeLogo.png" alt="Sal's Brews Logo" />
+    </div>
+    <div class="nav">
+      <a href="adminmenu.html" class="tab-link">Menu</a>
+      <a href="adminorders.html" class="tab-link">Orders</a>
+      <a href="adminfeedback.html" class="tab-link">Feedback</a>
+      <a href="adminusers.html" class="tab-link">User Accounts</a>
+    </div>
+    <button class="signout">SIGN OUT</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="tab-header">Customer Feedback</div>
+
+    <div class="orders-section">
+      <table class="orders-table" id="feedbackTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Rating</th>
+            <th>Feedback</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="feedbackBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Feedback Details</h2>
+      <p><strong>Customer:</strong> <span id="modalCustomer"></span></p>
+      <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+      <p><strong>Date:</strong> <span id="modalDate"></span></p>
+      <p><strong>Rating:</strong> <span id="modalRating"></span></p>
+      <p><strong>Message:</strong></p>
+      <p id="modalMessage"></p>
+    </div>
+  </div>
+
+  <script src="../../scripts/adminscripts/adminfeedback.js"></script>
+</body>
+</html>
