@@ -4,7 +4,8 @@ import { Schema, model } from "mongoose";
 const userSchema = new Schema ({
     userType: {
         type: String,
-        required: true
+        required: true,
+        default: "customer", // Default user type
     },
     firstName: {
         type: String,

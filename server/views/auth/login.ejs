@@ -12,16 +12,20 @@
     <div class="login-container">
         <img src="/assets/SBLogoLight.png" alt="Sal's Brews Logo" class="logo">
         <h2>SIGN-IN:</h2>
+        <form action="#" method="post">
+            <label for="user-name">USERNAME</label>
+            <input type="text" name="user-name" id="user-name">
+
+            <label for="password">PASSWORD</label>
+            <input type="password" name="password" id="password">
+
+            <button id="login" class="login-btn" onclick="">LOG-IN</button>
+
+            <p class="signup-text">Don't have an account yet? <a href="/auth/register">Click here</a> to Sign-up.</p>
+        </form>
         
-        <label for="user-name">USERNAME</label>
-        <input type="text" name="user-name" id="user-name">
-
-        <label for="password">PASSWORD</label>
-        <input type="password" name="password" id="password">
-
-        <button class="login-btn" onclick="location.href='/home'">LOG-IN</button>
-
-        <p class="signup-text">Don't have an account yet? <a href="/auth/register">Click here</a> to Sign-up.</p>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"></script>
+    <script src="/auth/login.js"></script>
 </html>
