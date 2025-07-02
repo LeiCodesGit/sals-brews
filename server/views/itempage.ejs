@@ -4,38 +4,20 @@
     <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sal's Brews</title>
-    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
 
-    <!-- Custom fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+     <%- include('partials/head') %>
 
-    <!-- Styles -->
-          <%- include('partials/head') %>
-    <link rel="stylesheet" href="../styles/itempageStyles.css">
+
+    <link rel="stylesheet" href="/styles/itempageStyles.css">
 </head>
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div><img src="../assets/SBhomeLogo.png" alt="Sal's Brews Logo"></div>
-        <div class="salsHeader">
-            <header class="salsHeader">
-                <a class="salsLink" href="#">Home</a>
-                <a class="salsLink" href="#">Menu</a>
-                <a class="salsLink" href="#">Contact Us</a>
-                <a class="cart" href="#"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #47532b;"></i></a>
-                <a class="humburger" href="#"><i class="fa-solid fa-bars fa-2xl" style="color: #452e1e;"></i></a>
-            </header>
-        </div>
-    </div>
+        <%- include('partials/navbar') %>
 
     <!-- Item Section -->
     <div class="item-page">
         <div class="item-image">
-            <img src="../assets/mocha.png" alt="Cafe Mocha">
+            <img src="/assets/mocha.png" alt="Cafe Mocha">
         </div>
 
         <div class="item-details">
@@ -86,7 +68,7 @@
             <div class="action-buttons">
                 <button class="add-to-cart">Add to Cart</button>
                 <button class="reset-btn" onclick="resetForm()">Reset</button>
-                <a href="homepage.html" class="cancel-btn">Cancel</a>
+                <a href="/" class="cancel-btn">Cancel</a>
             </div>
         </div>
     </div>
