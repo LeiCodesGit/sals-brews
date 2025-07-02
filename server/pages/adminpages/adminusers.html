@@ -2,15 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>User Accounts | Sal's Brews</title>
+  <title>Admin User Accounts | Sal's Brews</title>
   <link rel="stylesheet" href="../../styles/adminstyles/adminuserstyles.css" />
-
-  <!-- Custom Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
 </head>
-
 <body>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -28,24 +23,30 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <div class="tab-header">Manage User Accounts</div>
+    <div class="tab-header">User Accounts</div>
+    <button id="addUserBtn" class="add-item-btn">+ Add New User</button>
 
-    <!-- User Form -->
-    <form class="user-form">
-      <input type="text" placeholder="First Name" required />
-      <input type="text" placeholder="Last Name" required />
-      <input type="email" placeholder="Email / Username" required />
-      <input type="password" placeholder="Password" />
-      <input type="password" placeholder="Confirm Password" />
-      <input type="text" placeholder="Contact Number" />
-      <input type="number" placeholder="Age" min="18" />
-      <input type="text" placeholder="Address" />
-      <button type="submit" class="save-btn">SAVE CHANGES</button>
-    </form>
+    <!-- Modal -->
+    <div id="userModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Add User</h2>
+        <form id="userForm">
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="password" id="password" placeholder="Password" required />
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+          <input type="text" id="contact" placeholder="Contact Number" required />
+          <input type="number" id="age" placeholder="Age" required />
+          <input type="text" id="address" placeholder="Address" required />
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
 
-    <!-- Registered Users Table -->
+    <!-- User Table -->
     <div class="user-list">
-      <h3>Registered Users</h3>
       <table>
         <thead>
           <tr>
@@ -53,20 +54,16 @@
             <th>Email</th>
             <th>Contact</th>
             <th>Age</th>
+            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Jane Doe</td>
-            <td>jane@example.com</td>
-            <td>09171234567</td>
-            <td>21</td>
-            <td><button>Edit</button></td>
-          </tr>
-        </tbody>
+        <tbody id="userTableBody"></tbody>
       </table>
+      <!-- Pagination will be inserted here by JS -->
     </div>
   </div>
+
+  <script src="../../scripts/adminscripts/adminusers.js"></script>
 </body>
 </html>
