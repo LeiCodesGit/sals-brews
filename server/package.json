@@ -4,7 +4,6 @@
   "description": "M2 CPE143L Final Project - A Cafe Website",
   "main": "index.js",
   "type": "module",
-  
   "scripts": {
     "test": "npm test",
     "start": "nodemon index.js"
@@ -27,6 +26,7 @@
   },
   "homepage": "https://github.com/LeiCodesGit/sals-brews#readme",
   "dependencies": {
+    "axios": "^1.10.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.0",
     "ejs": "^3.1.10",
