@@ -2,30 +2,30 @@ import express from "express";
 const userRouter = express.Router();
 import User from "../models/users.js";
 
-userRouter.post("/users", async (req,res) => {
-    const user = req.body;
-
-    //create users to the database
-    const result = await User.create(user);
-    return res.status(201).json(result);
+// Create a new user
+userRouter.post("/", async (req, res) => {
+    try {
+        const user = await User.create(req.body);
+        return res.status(201).json(user);
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
+    }
 });
-    
-userRouter.get("/users/:id", async () => {
+
+// Get user by ID
+userRouter.get("/:id", async (req, res) => {
     const id = req.params.id;
-    const errorMessage = null;
 
     try {
         const user = await User.findById(id);
         if (user) {
-            return res.params.id;
+            return res.status(200).json(user);
+        } else {
+            return res.status(404).json({ error: "User not found" });
         }
-
-        errorMessage = "User not found";
+    } catch (error) {
+        return res.status(400).json({ error: "Invalid ID format" });
     }
-    catch (error) {
-        errorMessage = "User not found or invalid id";
-    }
-
-    res.status(404).json({error: errorMessage});
 });
+
 export default userRouter;
