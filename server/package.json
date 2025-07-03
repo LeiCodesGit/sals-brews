@@ -4,7 +4,6 @@
   "description": "M2 CPE143L Final Project - A Cafe Website",
   "main": "index.js",
   "type": "module",
-  
   "scripts": {
     "test": "npm test",
     "start": "nodemon index.js"
@@ -29,7 +28,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
