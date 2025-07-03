@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <title>Admin Menu | Sal's Brews</title>
   <link rel="stylesheet" href="/styles/adminstyles/adminmenustyles.css" />
+  <link rel="stylesheet" href="/styles/adminstyles/adminsidebarstyles.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+  <link rel="shortcut icon" href="/assets/SBIcon.ico" type="image/x-icon">
 </head>
 <body>
 
   <!-- Sidebar Partial -->
-  <% include ./partials/adminsidebar.ejs %>
+<%- include('../partials/adminsidebar', { page: 'menu' }) %>
 
   <!-- Main Content -->
   <div class="main-content">
