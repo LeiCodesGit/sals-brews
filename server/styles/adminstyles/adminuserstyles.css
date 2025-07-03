@@ -160,6 +160,15 @@ body {
   background-color: #fff8ec;
 }
 
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: 'Lora', serif;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff8ec;
+}
 
 .submit-btn {
   margin-top: 1rem;
@@ -211,3 +220,32 @@ body {
   font-size: 13px;
   margin-top: 4px;
 }
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #3c2f2f;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Highlight for Main Admin */
+tr.main-admin {
+  background-color: #ffe6c4;
+  font-weight: bold;
+}
+
+
