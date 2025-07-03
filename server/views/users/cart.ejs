@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--For Icons-->
+    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head') %>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="../styles/cartStyles.css">
+</head>
+
+<body>
+    <%- include('../partials/navbar') %>
+        <div class="page-wrapper">
+            <div id="content">
+
+
+                <div id="table">
+                    <h1>Your Cart</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Details</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="items">
+                                        <img src="../assets/mocha.png" alt="mocha">
+                                        <p>Mocha</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    Iced, 50%, 12oz
+                                </td>
+                                <td>1</td>
+                                <td>₱140.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="buttons">
+                    <a href="/orderinfo" id="check-out">Check Out</a>
+                </div>
+                
+            </div>
+            <%- include('../partials/footer') %>
+        </div>
+</body>
+
+</html>

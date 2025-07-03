@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #cbb897;
+    background: #cbb897 !important;
     align-items: center;
     justify-content: center;
 }
@@ -204,4 +204,23 @@ table a {
 
 table a:hover {
     color: #ffff;
+}
+
+.page-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }

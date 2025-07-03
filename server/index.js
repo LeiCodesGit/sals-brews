@@ -22,9 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
 // Static file serving
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/styles", express.static(path.join(__dirname, "styles")));
@@ -34,16 +31,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
 
-app.use('/assets', express.static(path.join(__dirname,'assets')));
-app.use('/styles', express.static(path.join(__dirname,'styles')));
-app.use('/scripts', express.static(path.join(__dirname,'scripts')));
-app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/', (req, res)=>{
-    res.render('home');
+// Connect to DB and start server
+connect();
+app.get("/itempage", (req, res) => {
+    res.render("users/itempage");
 });
-
 
 // Routes
 import userRouter from "./routes/users.js";
@@ -54,34 +47,32 @@ app.use("/users", userRouter);
 
 // Default/home route
 app.get("/", (req, res) => {
-  res.render("home"); // views/home.ejs
+  res.render("users/home"); // views/home.ejs
 });
 
-// Connect to DB and start server
-connect();
-app.get("/itempage", (req, res) => {
-    res.render("itempage");
+app.get('/menu', (req, res) => {
+    res.render('users/menu');
 });
+
+app.get('/', (req, res) => {
+    res.render('users/home');
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
 
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/cart', (req, res) => {
+    res.render('users/cart');
 });
 
-app.get('/menu', (req, res) => {
-    res.render('menu');
+app.get('/orderinfo', (req, res) => {
+    res.render('users/orderinformation');
 });
 
-app.get('/itempage', (req, res) => {
-    const item = req.query.item; 
-    res.render('itempage');
-});
-
-app.get('/h', (req, res) => {
-    res.render('home');
+app.get('/profile', (req, res) => {
+    res.render('users/profile');
 });
 
 
