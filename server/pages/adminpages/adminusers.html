@@ -16,7 +16,7 @@
       <a href="adminmenu.html" class="tab-link">Menu</a>
       <a href="adminorders.html" class="tab-link">Orders</a>
       <a href="adminfeedback.html" class="tab-link">Feedback</a>
-      <a href="adminusers.html" class="tab-link">User Accounts</a>
+      <a href="adminusers.html" class="tab-link">Accounts</a>
     </div>
     <button class="signout">SIGN OUT</button>
   </div>
@@ -35,32 +35,41 @@
           <input type="text" id="firstName" placeholder="First Name" required />
           <input type="text" id="lastName" placeholder="Last Name" required />
           <input type="email" id="email" placeholder="Email" required />
-          <input type="password" id="password" placeholder="Password" required />
-          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+          <input type="password" id="password" placeholder="Password" />
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" />
           <input type="text" id="contact" placeholder="Contact Number" required />
           <input type="number" id="age" placeholder="Age" required />
           <input type="text" id="address" placeholder="Address" required />
+          <select id="accountType" required>
+            <option value="">-- Select Account Type --</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
           <button type="submit" class="submit-btn">Submit</button>
         </form>
       </div>
     </div>
 
-    <!-- User Table -->
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- User List-->
     <div class="user-list">
+      <h3>Admin Accounts</h3>
       <table>
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
+          <tr><th>Name</th><th>Email</th><th>Contact</th><th>Role</th><th>Action</th></tr>
+        </thead>
+        <tbody id="adminTableBody"></tbody>
+      </table>
+
+      <h3 style="margin-top: 2rem;">User Accounts</h3>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Contact</th><th>Age</th><th>Address</th><th>Action</th></tr>
         </thead>
         <tbody id="userTableBody"></tbody>
       </table>
-      <!-- Pagination will be inserted here by JS -->
     </div>
   </div>
 
