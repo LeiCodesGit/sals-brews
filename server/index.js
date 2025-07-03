@@ -59,9 +59,11 @@ app.get('/', (req, res)=>{
 // Routes
 import authRouter from "./routes/auth/routes.js";
 import adminRouter from "./routes/admin/routes.js";
+import productRouter from "./routes/products.js";
 
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
+app.use("/products", productRouter);
 
 // Default/home route
 app.get("/", (req, res) => {
