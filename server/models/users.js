@@ -5,7 +5,6 @@ const userSchema = new Schema ({
     userType: {
         type: String,
         required: true,
-        default: "customer", // Default user type
     },
     firstName: {
         type: String,
