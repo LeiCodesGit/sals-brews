@@ -8,8 +8,6 @@ export default function connect() {
 
     mongoose
     .connect(database, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
         dbName: "sals-brews",
     })
     

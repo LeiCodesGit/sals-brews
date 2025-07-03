@@ -134,9 +134,10 @@ body {
 
 .menu-item img {
     width: 100%;
-    height: auto;
+    height: 150px;
     border-radius: 10px;
     background: #ccc;
+    object-fit: cover;
 }
 
 .menu-item img:hover {
@@ -153,6 +154,12 @@ body {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.menu-item p {
+    min-height: 40px;
+    line-height: 1.2;
+    margin: 4px 0;
 }
 
 /* Tabs */
