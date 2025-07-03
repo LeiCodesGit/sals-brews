@@ -10,39 +10,6 @@ body {
     justify-content: center;
 }
 
-/* Navbar */
-.navbar {
-    font-family: "Bricolage Grotesque", sans-serif;
-    background: #cbb897;
-    color: #f7efda;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.salsHeader {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.salsLink {
-    text-decoration: none;
-    color: #452e1e;
-    font-size: 20px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.salsLink:hover {
-    color: #47532b;
-    font-size: 21px;
-    border-bottom: 2px solid #47532b;
-    transform: scale(1.05);
-}
-
-/* end Navbar */
 
 /*user-profile*/
 
@@ -96,7 +63,7 @@ body {
     gap: 20px
 }
 
-#edit-profile, #cancel-edit {
+#edit-profile, #cancel-edit, #save-edit {
     padding: 10px 15px;
     color: #ffff;
     font-size: 14px;
@@ -109,10 +76,25 @@ body {
     background-color: #47532b;
 }
 
+#save-edit:hover {
+    background-color: #726969;
+   
+}
+#edit-profile:hover{
+    background-color: #726969;
+  
+}
+#cancel-edit:hover {
+   background-color: #726969;
+  
+}
+
 #cancel-edit {
     background-color: #452e1e;
 }
-
+#save-edit {
+    background-color: #3a6f3a;
+}
 /* end user-profile*/
 
 /*orders*/
@@ -223,4 +205,9 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+input[type="password"] {
+    width: auto;  
+    padding-left: 10px;  
 }

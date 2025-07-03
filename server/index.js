@@ -15,15 +15,18 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 4000;
+
+connect();
 
 // Middlewares
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cors({origin: `http://localhost:${port}`,credentials: true}));
 
-// Session management
 app.use(session({
     secret: process.env.SESSION_SECRET, 
     resave: false,
@@ -46,6 +49,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/styles", express.static(path.join(__dirname, "styles")));
 app.use("/scripts", express.static(path.join(__dirname, "scripts")));
 app.use(express.static(path.join(__dirname, "public"))); 
+
 //set Ejs as the templating engine
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -58,6 +62,7 @@ app.get("/itempage", (req, res) => {
 });
 
 // Routes
+
 import authRouter from "./routes/auth/routes.js";
 import adminRouter from "./routes/admin/routes.js";
 import productRouter from "./routes/products.js";
@@ -77,15 +82,6 @@ app.get('/menu', (req, res) => {
     res.render('users/menu');
 });
 
-app.get('/', (req, res) => {
-    res.render('users/home');
-});
-
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
-
 app.get('/cart', (req, res) => {
     res.render('users/cart');
 });
@@ -94,9 +90,10 @@ app.get('/orderinfo', (req, res) => {
     res.render('users/orderinformation');
 });
 
-app.get('/profile', (req, res) => {
-    res.render('users/profile');
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
+
 
 
 
