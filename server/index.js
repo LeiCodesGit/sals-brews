@@ -6,6 +6,7 @@ import { dirname } from "path";
 import dotenv from "dotenv";
 import connect from "./database/mongodb-connect.js";
 import  session from "express-session";
+import MongoStore from "connect-mongo";
 
 // Load environment variables
 dotenv.config();
@@ -18,18 +19,25 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors({credentials: true}));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(cors({origin: `http://localhost:${port}`,credentials: true}));
 
 // Session management
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET, 
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false, 
+    store: MongoStore.create({ 
+        mongoUrl: process.env.DB_CONNECTION, 
+        dbName: "sals-brews",
+        collectionName: "sessions", 
+        ttl: 1000 * 60 * 60 
+    }),
     cookie: {
-        secure: false,
-        maxAge: 1000 * 60 * 60 // 1 hour
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 1000 * 60 * 60, 
+        httpOnly: true,
     }
 }));
 
@@ -60,10 +68,12 @@ app.get('/', (req, res)=>{
 import authRouter from "./routes/auth/routes.js";
 import adminRouter from "./routes/admin/routes.js";
 import productRouter from "./routes/products.js";
+import cartRouter from "./routes/api/cart.js";
 
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/products", productRouter);
+
 
 // Default/home route
 app.get("/", (req, res) => {
