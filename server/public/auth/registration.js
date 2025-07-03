@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (!/^\d{11}$/.test(contact)) {
-        alert("Contact number must be 10 to 13 digits long.");
+        alert("Contact number must be 11 digits long.");
         return;
         }
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
         }
 
-        if (age > 0) {
+        if (age > 18) {
         alert("You must be at least 18 years old.");
         return;
         }
@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
         console.error(error);
         alert(error.response?.data?.message || "Registration failed");
+        console.log("Error details:", error.response?.data);
         }
     });
 });
