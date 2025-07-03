@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+     <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sal's Brews</title>
+    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
+
+    <!--custom fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/orderinformationStyles.css">
+    <script src="../scripts/orderinformationScript.js" defer></script>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><img src="../assets/SBhomeLogo.png"></div>
+        <div class="salsHeader">
+            <header class="salsHeader">
+                <a class="salsLink" href="">Home</a>
+                <a class="salsLink" href="">Menu</a>
+                <a class="salsLink" href="">Contact Us</a>
+                <a class="cart" href=""><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #47532b;"></i></a>
+                <a class="humburger" href=""><i class="fa-solid fa-bars fa-2xl" style="color: #452e1e;"></i></a>
+            </header>
+        </div>
+    </div>
+
+    <div class="orderinformation">
+        <h1>Order Summary</h1>
+
+        <div class="orderDetails">
+            <p style="align-items: center; justify-content: center; display: grid; padding-bottom: 40px; padding-top: 20px; max-width: fit-content;" ><strong>Order Number:</strong><span id="orderNumber"></span> </p>
+            
+            <div class="itemDescription">
+                 <p class="yourOrder">Your Order:</p>
+                
+                <div class="itemDetails">
+                    <img id="itemImage" src="" alt="Item Image">
+                    <p><strong></strong><span id="itemName"></span></p>
+                </div>  
+            </div>
+           
+            <p><strong>Date: </strong><span id="orderDate"></span> </p>
+            <p><strong>Total Amount:</strong><span id="totalAmount"></span></p>
+        </div>
+    </div>
+</body>
+</html> 
