@@ -1,4 +1,5 @@
 import express from "express";
+
 import Product from "../models/products.js";
 import failIfUnauthorizedAdmin from "../middlewares/failIfUnauthorizedAdmin.js";
 
@@ -6,6 +7,7 @@ const productRouter = express.Router();
 
 // Get all available products
 productRouter.get("/", async (req, res) => {
+
   try {
     const products = await Product.find({ isAvailable: true });
     res.status(200).json(products);
@@ -16,6 +18,7 @@ productRouter.get("/", async (req, res) => {
 
 // Add new product
 productRouter.post("/", failIfUnauthorizedAdmin, async (req, res) => {
+
   try {
     const newProduct = new Product(req.body);
     await newProduct.save();
@@ -31,6 +34,7 @@ productRouter.post("/", failIfUnauthorizedAdmin, async (req, res) => {
 
 // Delete product
 productRouter.delete("/:id", failIfUnauthorizedAdmin, async (req, res) => {
+
   try {
     const deleted = await Product.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: "Product not found" });
