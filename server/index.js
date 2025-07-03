@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import dotenv from "dotenv";
 import connect from "./database/mongodb-connect.js";
+import  session from "express-session";
 
 // Load environment variables
 dotenv.config();
@@ -16,11 +17,21 @@ const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Middleware
-// Middleware to parse JSON bodies
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({credentials: true}));
+
+// Session management
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        maxAge: 1000 * 60 * 60 // 1 hour
+    }
+}));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -46,11 +57,9 @@ app.get('/', (req, res)=>{
 
 
 // Routes
-import userRouter from "./routes/users.js";
 import authRouter from "./routes/auth/routes.js";
 
 app.use("/auth", authRouter);
-app.use("/users", userRouter);
 
 // Default/home route
 app.get("/", (req, res) => {
