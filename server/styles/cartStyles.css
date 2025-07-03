@@ -16,40 +16,6 @@ body {
     align-items: center;
 }
 
-/* Navbar */
-.navbar {
-    font-family: "Bricolage Grotesque", sans-serif;
-    background: #cbb897;
-    color: #f7efda;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.salsHeader {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.salsLink {
-    text-decoration: none;
-    color: #452e1e;
-    font-size: 20px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.salsLink:hover {
-    color: #47532b;
-    font-size: 21px;
-    border-bottom: 2px solid #47532b;
-    transform: scale(1.05);
-}
-
-/* end Navbar */
-
 #table h1 {
     text-align: center;
     color: #452e1e;
