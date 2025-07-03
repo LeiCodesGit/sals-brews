@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #d6c29b !important;
+    background:  #cbb897 !important;
     font-family: "Lora", serif;
 }
 
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     padding: 40px 100px;
     font-family: "Bricolage Grotesque", sans-serif;
-    color: #d8c29b;
+    color: #452e1e;
 }
 
 .item-image img {

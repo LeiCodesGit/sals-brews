@@ -18,9 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 password,
             });
 
+            const user = response.data.user;
+
             alert("Login successful!");
-            // Redirect to homepage after successful login
-            window.location.href = "/";
+
+            // Redirect based on user type
+            if (user.userType === "admin") {
+                window.location.href = "/admin/adminmenu";
+            } else {
+                window.location.href = "/";
+            }
         } catch (error) {
             const message = error.response?.data?.message || "Login failed";
             alert(message);

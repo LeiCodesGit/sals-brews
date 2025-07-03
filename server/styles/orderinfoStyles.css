@@ -79,19 +79,26 @@ td {
     height: 150px;
 }
 
-/* end Table */
-
-
-#check-out {
-    font-family: "Bricolage Grotesque", sans-serif;
-    font-weight: bolder;
-    padding: 10px 30px;
-    font-size: 16px;
-    border-radius: 20px;
-    border: none;
-    background-color: #47532b;
-    color: #cbb897;
+.order-number {
+    text-align: center;
+    color: #452e1e;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #cbb897;
+    font-family: "Lora", serif;
+    margin-bottom: 10px;
+    margin-top: 0;
+    padding-top: 0;
 }
+
+#content h1{
+    text-align: center;
+    color: #452e1e;
+    background-color: #cbb897;
+    font-family: "Lora", serif;
+    margin-bottom: 0;
+}
+
 
 .page-wrapper{
     display: flex;
@@ -102,3 +109,4 @@ td {
 #content{
     flex: 1;
 }
+

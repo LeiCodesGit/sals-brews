@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--For Icons-->
+    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sal's Brews</title>
+    <link rel="shortcut icon" href="../assets/SBIcon.ico" type="image/x-icon">
+
+    <%- include('../partials/head') %>
+
+        <link rel="stylesheet" href="../styles/profileStyles.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <%- include('../partials/navbar') %>
+            <div id="content">
+                <div id="user-profile">
+                    <h1>USER PROFILE</h1>
+                    <div id="user-content">
+                        <form id="profile-form">
+                            <div class="container">
+                                <div class="user-info">
+                                    <label for="full-name">Full Name:</label>
+                                    <input type="text" name="full-name" id="full-name"
+                                        value="<%= user.firstName %> <%= user.lastName %>" readonly>
+                                </div>
+                                <div class="user-info">
+                                    <label for="age">Age:</label>
+                                    <input type="number" name="age" id="age" value="<%= user.age %>" min="0" readonly>
+                                </div>
+                                <div class="user-info">
+                                    <label for="address">Address:</label>
+                                    <input type="text" name="address" id="address" value="<%= user.address %>" readonly>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="user-info">
+                                    <label for="contact-number">Contact Number:</label>
+                                    <input type="tel" name="contact-number" id="contact-number"
+                                        value="<%= user.contactNumber %>" readonly>
+                                </div>
+                                <div class="user-info">
+                                    <label for="email">Email:</label>
+                                    <input type="email" name="email" id="email" value="<%= user.email %>" readonly>
+                                </div>
+                                <div class="user-info">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" id="password" value="*********" readonly>
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                    <div id="buttons">
+                        <button id="edit-profile">EDIT PROFILE</button>
+                        <button id="cancel-edit" style="display: none;">CANCEL EDIT</button>
+                        <button id="save-edit" style="display: none;">SAVE</button>
+                    </div>
+                </div>
+
+                <div id="orders">
+                    <h2>ORDERS</h2>
+                    <div id="select">
+                        <a href="#">Ongoing</a>
+                        <a href="#">History</a>
+                    </div>
+
+                    <div id="table">
+                        <table>
+                            <colgroup>
+                                <col style="width: 15%;">
+                                <col style="width: 15%;">
+                                <col style="width: 20%;">
+                                <col style="width: 30%;">
+                                <col style="width: 10%;">
+                                <col style="width: 20%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Address</th>
+                                    <th>Total</th>
+                                    <th><i class="fa-solid fa-mug-saucer"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= order.orderId %>
+                                    </td>
+                                    <td>
+                                        <%= order.date %>
+                                    </td>
+                                    <td>
+                                        <%= order.status %>
+                                    </td>
+                                    <td>
+                                        <%= order.address %>
+                                    </td>
+                                    <td>
+                                        <%= order.total %>
+                                    </td>
+                                    <td><a href="">view order</a></td>
+                                </tr>
+                                <tr>
+                                    <td>sample</td>
+                                    <td>sample</td>
+                                    <td>sample</td>
+                                    <td>sample</td>
+                                    <td>sample</td>
+                                    <td><a href="">view order</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <%- include('../partials/footer') %>
+            </div>
+    </div>
+    <script>
+
+        const editButton = document.getElementById('edit-profile');
+        const cancelButton = document.getElementById('cancel-edit');
+        const saveButton = document.getElementById('save-edit');
+        const profileForm = document.getElementById('profile-form');
+        const inputs = profileForm.querySelectorAll('input');
+
+        editButton.addEventListener('click', () => {
+            // Make all fields editable
+            inputs.forEach(input => input.removeAttribute('readonly'));
+
+            // Show "Save" and "Cancel" buttons
+            cancelButton.style.display = 'inline-block';
+            saveButton.style.display = 'inline-block';
+            editButton.style.display = 'none';
+        });
+
+        cancelButton.addEventListener('click', () => {
+            // Reset form to its original state
+            profileForm.reset();
+
+            // Hide "Save" and "Cancel" buttons, show "Edit" button
+            cancelButton.style.display = 'none';
+            saveButton.style.display = 'none';
+            editButton.style.display = 'inline-block';
+        });
+
+       saveButton.addEventListener('click', async () => {
+    const updatedData = {
+        firstName: document.getElementById('full-name').value.split(' ')[0],
+        lastName: document.getElementById('full-name').value.split(' ')[1],
+        age: document.getElementById('age').value,
+        address: document.getElementById('address').value,
+        contactNumber: document.getElementById('contact-number').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value !== '*********' ? document.getElementById('password').value : undefined
+    };
+
+    try {
+        const response = await fetch('/users/profile', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        const result = await response.json(); 
+        if (result.message === 'Profile updated successfully') {
+            // Update the form with the new data
+            document.getElementById('full-name').value = `${result.user.firstName} ${result.user.lastName}`;
+            document.getElementById('age').value = result.user.age;
+            document.getElementById('address').value = result.user.address;
+            document.getElementById('contact-number').value = result.user.contactNumber;
+            document.getElementById('email').value = result.user.email;
+            document.getElementById('password').value = '*********';
+
+            cancelButton.style.display = 'none';
+            saveButton.style.display = 'none';
+            editButton.style.display = 'inline-block';
+
+            alert('Profile updated successfully!');
+        } else {
+            alert('Failed to update profile: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error updating profile:', error);
+    }
+});
+    </script>
+</body>
+
+</html>

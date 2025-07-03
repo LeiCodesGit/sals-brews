@@ -1,11 +1,13 @@
 import express from "express";
-import Product from "../models/products.js"; 
+
+import Product from "../models/products.js";
 import failIfUnauthorizedAdmin from "../middlewares/failIfUnauthorizedAdmin.js";
 
-const router = express.Router();
+const productRouter = express.Router();
 
-// Get all available products for user home/menu pages
-router.get("/", async (req, res) => {
+// Get all available products
+productRouter.get("/", async (req, res) => {
+
   try {
     const products = await Product.find({ isAvailable: true });
     res.status(200).json(products);
@@ -15,31 +17,24 @@ router.get("/", async (req, res) => {
 });
 
 // Add new product
-router.post("/", failIfUnauthorizedAdmin, async (req, res) => {
+productRouter.post("/", failIfUnauthorizedAdmin, async (req, res) => {
+
   try {
     const newProduct = new Product(req.body);
     await newProduct.save();
     res.status(201).json({ message: "Product added", product: newProduct });
   } catch (error) {
-    res.status(400).json({ message: "Failed to add product", error });
+    res.status(400).json({
+  message: "Failed to add product",
+  error: error.message,
+  stack: error.stack
+});
   }
 });
 
-// Update product by ID
-router.put("/:id", failIfUnauthorizedAdmin, async (req, res) => {
-  try {
-    const updated = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!updated) return res.status(404).json({ message: "Product not found" });
-    res.json({ message: "Product updated", product: updated });
-  } catch (error) {
-    res.status(500).json({ message: "Error updating product", error });
-  }
-});
+// Delete product
+productRouter.delete("/:id", failIfUnauthorizedAdmin, async (req, res) => {
 
-// Delete product by ID
-router.delete("/:id", failIfUnauthorizedAdmin, async (req, res) => {
   try {
     const deleted = await Product.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: "Product not found" });
@@ -49,4 +44,4 @@ router.delete("/:id", failIfUnauthorizedAdmin, async (req, res) => {
   }
 });
 
-export default router;
+export default productRouter;

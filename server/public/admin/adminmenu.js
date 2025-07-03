@@ -1,250 +1,254 @@
-const modal = document.getElementById("addItemModal");
-const openBtn = document.getElementById("addItemBtn");
-const closeBtn = document.querySelector(".close");
 
-const categorySelect = document.getElementById("category");
-const tempDiv = document.getElementById("tempOptions");
-const sizeDiv = document.getElementById("sizeOptions");
-const addonsDiv = document.getElementById("addonsDiv");
+window.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("addItemModal");
+  const openBtn = document.getElementById("addItemBtn");
+  const closeBtn = document.querySelector(".close");
 
-let editingItem = null;
-let editingProductId = null;
-let imagePreviewData = "";
+  const categorySelect = document.getElementById("category");
+  const tempDiv = document.getElementById("tempOptions");
+  const sizeDiv = document.getElementById("sizeOptions");
+  const addonsDiv = document.getElementById("addonsDiv");
 
-// Modal open/close
+  let editingItem = null;
+  let imagePreviewData = "";
 
-openBtn.onclick = () => {
-  resetForm();
-  modal.style.display = "flex";
-};
+  // Show modal
+  openBtn.onclick = () => {
+    resetForm();
+    modal.style.display = "flex";
+  };
 
-closeBtn.onclick = () => (modal.style.display = "none");
+  // Close modal
+  closeBtn.onclick = () => modal.style.display = "none";
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  };
 
+  // Toggle input groups based on category
+  categorySelect.addEventListener("change", () => {
+    const isPastry = categorySelect.value === "pastries";
+    tempDiv.style.display = isPastry ? "none" : "block";
+    sizeDiv.style.display = isPastry ? "none" : "block";
+    addonsDiv.style.display = isPastry ? "none" : "block";
+  });
 
-window.onclick = (e) => {
-  if (e.target === modal) modal.style.display = "none";
-};
-
-// Toggle options based on category
-categorySelect.addEventListener("change", () => {
-  const isPastry = categorySelect.value === "pastries";
-  tempDiv.style.display = isPastry ? "none" : "block";
-  sizeDiv.style.display = isPastry ? "none" : "block";
-  addonsDiv.style.display = isPastry ? "none" : "block";
-});
-
-// Image preview
-document.getElementById("image").addEventListener("change", function () {
+  document.getElementById("image").addEventListener("change", async function () {
   const file = this.files[0];
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    imagePreviewData = e.target.result;
-  };
-  if (file) reader.readAsDataURL(file);
+  if (!file) return;
+
+  try {
+    imagePreviewData = await convertImageToBase64(file);
+    console.log("Base64 image preview ready");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to read image file.");
+  }
 });
 
-// Form submission
-document.getElementById("menuForm").onsubmit = function (e) {
-  e.preventDefault();
+  // Submit form
+  document.getElementById("menuForm").onsubmit = async function (e) {
+    e.preventDefault();
 
-  const name = document.getElementById("itemName").value;
-  const category = categorySelect.value;
-  
-  const price = parseFloat(document.getElementById("price").value);
+    const name = document.getElementById("itemName").value;
+    const category = categorySelect.value;
+    const price = parseFloat(document.getElementById("price").value);
 
-  const sizeMap = { "12 oz": 0, "14 oz": 15, "16 oz": 25 };
-  const sizes = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => ({
-    label: cb.value,
-    price: sizeMap[cb.value]
-  }));
+    const sizeMap = {
+      "12oz": 0,
+      "14oz": 15,
+      "16oz": 25
+    };
 
-  const temperatures = Array.from(document.querySelectorAll('input[name="temperature"]:checked')).map(cb => cb.value);
+    const sizes = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => ({
+      label: cb.value,
+      price: sizeMap[cb.value] || 0
+    }));
 
-  const addons = Array.from(document.querySelectorAll("#addonContainer .addon-group")).map(group => ({
-    name: group.querySelector("input[type=text]").value,
-    price: parseFloat(group.querySelector("input[type=number]").value)
-  }));
+    const temperatures = Array.from(document.querySelectorAll('input[name="temperature"]:checked')).map(cb => cb.value);
 
-  const productData = {
-    product_name: name,
-    product_image: imagePreviewData,
-    category,
-    price,
-    isAvailable: true,
-    isBestSeller: false,
-    sizes,
-    temperature_options: temperatures,
-    addons
-  };
+    const addons = Array.from(document.querySelectorAll("#addonContainer .addon-group")).map(group => ({
+      name: group.querySelector("input[type=text]").value,
+      price: parseFloat(group.querySelector("input[type=number]").value)
+    }));
 
-  const fetchOptions = {
-    method: editingProductId ? "PUT" : "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(productData)
-  };
+    const productData = {
+      product_name: name,
+      product_image: imagePreviewData,
+      category,
+      price,
+      sizes,
+      temperature_options: temperatures,
+      addons,
+      isAvailable: true,
+      isBestSeller: false
+    };
 
-  const url = editingProductId ? `/products/${editingProductId}` : "/products";
+    try {
+  const res = await axios.post("/products", productData);
 
-  fetch(url, fetchOptions)
-    .then(res => res.json())
-    .then(data => {
-      alert(editingProductId ? "Product updated!" : "Product added!");
-      modal.style.display = "none";
-      loadMenuItems(); 
-    })
-    .catch(err => {
-      console.error("Failed to save product:", err);
-      alert("Something went wrong.");
-    });
+  if (res.status === 201) {
+    alert("Product added successfully!");
+    addItemCard(res.data.product);
+    modal.style.display = "none";
+    this.reset();
+    imagePreviewData = "";
+    document.getElementById("addonContainer").innerHTML = "";
+  } else {
+    alert(res.data.message || "Unexpected response from server.");
+    console.warn("Unexpected Axios response:", res);
+  }
 
-  this.reset();
-  imagePreviewData = "";
-  document.getElementById("addonContainer").innerHTML = "";
-};
+} catch (err) {
+  console.error("Axios POST Error:", err);
 
-// Load menu items on page load
-function loadMenuItems() {
-  const sections = ["coffee", "non-coffee", "matcha", "pastries"];
-  sections.forEach(section => {
-    const container = document.getElementById(`${section}-items`);
-    if (container) container.innerHTML = "";
-  });
+  if (err.response) {
+    // Server responded with a status outside 2xx
+    console.error("Server Response:", err.response);
+    console.error("Status Code:", err.response.status);
+    console.error("Response Data:", err.response.data);
 
-  fetch("/products")
-    .then(res => res.json())
-    .then(products => {
-      products.forEach(product => renderProductCard(product));
-    });
+    alert(
+      `Failed to add product.\n` +
+      `Status: ${err.response.status}\n` +
+      `Message: ${err.response.data?.message || "No message"}\n` +
+      `Details: ${err.response.data?.error || "No details"}`
+    );
+
+  } else if (err.request) {
+    // No response received
+    console.error("No response from server. Request details:", err.request);
+    alert("No response from server. Check your internet connection or backend.");
+  } else {
+    // Error setting up the request
+    console.error("Request Setup Error:", err.message);
+    alert(`Request setup failed: ${err.message}`);
+  }
 }
 
-function renderProductCard(product) {
-  const container = document.getElementById(`${product.category}-items`);
-  if (!container) return;
+  };
 
-  const card = document.createElement("div");
-  card.className = "menu-item";
+  // Create card in DOM
+  function addItemCard(item) {
+    const itemCard = document.createElement("div");
+    itemCard.className = "menu-item";
 
-  const img = document.createElement("img");
-  img.src = product.product_image || "../../assets/default-placeholder.png";
-  img.alt = product.product_name;
+    const img = document.createElement("img");
+    img.src = item.product_image || "/assets/default-placeholder.png";
+    img.alt = item.product_name;
 
-  const title = document.createElement("h3");
-  title.textContent = product.product_name;
+    const title = document.createElement("h3");
+    title.textContent = item.product_name;
 
-  const categoryTag = document.createElement("p");
-  categoryTag.textContent = product.category;
+    const categoryTag = document.createElement("p");
+    categoryTag.textContent = item.category;
 
-  const sizeText = product.sizes?.map(s => `${s.label} (+₱${s.price})`).join(", ") || "N/A";
-  const sizeTag = document.createElement("p");
-  sizeTag.textContent = `Sizes: ${sizeText}`;
+    const sizeTag = document.createElement("p");
+    sizeTag.textContent = "Sizes: " + (item.sizes?.length
+      ? item.sizes.map(s => `${s.label} (+₱${s.price})`).join(", ")
+      : "N/A");
 
-  const priceTag = document.createElement("span");
-  priceTag.className = "price";
-  priceTag.textContent = `₱${product.price}`;
-  
-  const removeBtn = document.createElement("button");
-  removeBtn.className = "remove-btn";
-  removeBtn.textContent = "Remove";
-  removeBtn.onclick = (e) => {
-    e.stopPropagation();
-    
-    if (confirm("Delete this product?")) {
-      fetch(`/products/${product._id}`, { method: "DELETE" })
-        .then(res => res.json())
-        .then(() => {
-          card.remove();
-        });
+    const priceTag = document.createElement("span");
+    priceTag.className = "price";
+    priceTag.textContent = `₱${item.price}`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.textContent = "Remove";
+    removeBtn.onclick = async (e) => {
+      e.stopPropagation();
+      if (!confirm("Are you sure you want to delete this item?")) return;
+      try {
+        const res = await axios.delete(`/products/${item._id}`);
+        if (res.status === 200) {
+          itemCard.remove();
+        } else {
+          alert("Failed to delete item.");
+        }
+      } catch (err) {
+        alert("Error deleting product.");
+      }
+    };
+
+    itemCard.appendChild(img);
+    itemCard.appendChild(title);
+    itemCard.appendChild(categoryTag);
+    itemCard.appendChild(sizeTag);
+    itemCard.appendChild(priceTag);
+    itemCard.appendChild(removeBtn);
+
+    const container = document.getElementById(`${item.category}-items`);
+    container.appendChild(itemCard);
+  }
+
+  // Add-ons
+  function addAddon(name = "", price = "") {
+    const container = document.getElementById("addonContainer");
+    const group = document.createElement("div");
+    group.className = "addon-group";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "Add-on Name";
+    nameInput.value = name;
+
+    const priceInput = document.createElement("input");
+    priceInput.type = "number";
+    priceInput.placeholder = "₱";
+    priceInput.value = price;
+
+    group.appendChild(nameInput);
+    group.appendChild(priceInput);
+    container.appendChild(group);
     }
-  };
 
-  card.onclick = () => editItem(product);
+    // Reset modal
+    function resetForm() {
+      document.getElementById("modalTitle").textContent = "Add Menu Item";
+      document.getElementById("menuForm").reset();
+      document.getElementById("addonContainer").innerHTML = "";
+      editingItem = null;
+      imagePreviewData = "";
+  }
 
-  card.append(img, title, categoryTag, sizeTag, priceTag, removeBtn);
-  container.appendChild(card);
-}
+  function convertImageToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-// Edit existing product
-function editItem(product) {
-  document.getElementById("modalTitle").textContent = "Edit Menu Item";
-  document.getElementById("itemName").value = product.product_name;
-  document.getElementById("price").value = product.price;
-  categorySelect.value = product.category;
-  imagePreviewData = product.product_image;
-  editingProductId = product._id;
+      reader.onload = function (event) {
+        resolve(event.target.result); // Base64 string
+      };
 
-  document.querySelectorAll('input[name="size"]').forEach(cb => {
-    cb.checked = product.sizes?.some(s => s.label === cb.value);
+      reader.onerror = function (error) {
+        reject("Error converting image to Base64: " + error);
+      };
+      reader.readAsDataURL(file); // Triggers base64 conversion
+    });
+  }
+
+  (async function loadAllProducts() {
+    try {
+        const res = await axios.get("/products");
+        const products = res.data;
+
+        if (Array.isArray(products)) {
+          products.forEach(addItemCard);
+        } else {
+          console.warn("Unexpected response format:", products);
+        }
+    } catch (err) {
+      console.error("Failed to fetch products:", err);
+
+      if (err.response) {
+        alert(`Failed to load products.\nStatus: ${err.response.status}\nMessage: ${err.response.data?.message}`);
+      } else {
+        alert("Failed to load products. Check your connection or server.");
+      }
+      }
+  })();
+
+
+  loadAllProducts().catch(err => {
+    console.error("Error loading products:", err);
+    alert("Failed to load products. Please try again later.");
   });
-
-  document.querySelectorAll('input[name="temperature"]').forEach(cb => {
-    cb.checked = product.temperature_options?.includes(cb.value);
-  });
-
-  document.getElementById("addonContainer").innerHTML = "";
-  product.addons?.forEach(a => addAddon(a.name, a.price));
-
-  categorySelect.dispatchEvent(new Event("change"));
-  modal.style.display = "flex";
-}
-
-// Add an add-on row
-    
-function addAddon(name = "", price = "") {
-  const container = document.getElementById("addonContainer");
-  const group = document.createElement("div");
-  group.className = "addon-group";
-
-  const nameInput = document.createElement("input");
-  nameInput.type = "text";
-  nameInput.placeholder = "Add-on Name";
-  nameInput.value = name;
-
-  const priceInput = document.createElement("input");
-  priceInput.type = "number";
-  priceInput.placeholder = "₱";
-  priceInput.value = price;
-
-  group.append(nameInput, priceInput);
-  container.appendChild(group);
-}
-
-// Reset form and state
-  group.appendChild(nameInput);
-  group.appendChild(priceInput);
-  container.appendChild(group);
-}
-
-function editItem(item) {
-  document.getElementById("modalTitle").textContent = "Edit Menu Item";
-  document.getElementById("itemName").value = item.name;
-  categorySelect.value = item.category;
-  document.getElementById("price").value = item.price;
-  imagePreviewData = item.image || "";
-
-  document.querySelectorAll('input[name="size"]').forEach(cb => {
-    cb.checked = item.sizes.includes(cb.value);
-  });
-
-  document.querySelectorAll('input[name="temperature"]').forEach(cb => {
-    cb.checked = item.temperatures.includes(cb.value);
-  });
-
-  document.getElementById("addonContainer").innerHTML = "";
-  item.addons.forEach(a => addAddon(a.name, a.price));
-
-  categorySelect.dispatchEvent(new Event("change"));
-  editingItem = event.currentTarget;
-  modal.style.display = "flex";
-}
-
-function resetForm() {
-  document.getElementById("modalTitle").textContent = "Add Menu Item";
-  document.getElementById("menuForm").reset();
-  document.getElementById("addonContainer").innerHTML = "";
-  editingItem = null;
-  editingProductId = null;
-  imagePreviewData = "";
-}
-
-// Initialize
-loadMenuItems();
+});
