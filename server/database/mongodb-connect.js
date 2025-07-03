@@ -12,6 +12,7 @@ export default function connect() {
         useUnifiedTopology: true,
         dbName: "sals-brews",
     })
+    
     .then(() => {
         console.log("Connected to database");
     })
