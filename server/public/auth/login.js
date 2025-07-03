@@ -1,34 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");
-    const loginButton = document.getElementById("login");
 
-    loginForm.addEventListener("submit", (event) => {
+    loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const formData = new FormData(loginForm);
-        const data = Object.fromEntries(formData.entries());
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
 
-        // Disable the login button
-        loginButton.setAttribute("disabled", true);
+        if (!email || !password) {
+            alert("Please enter both email and password.");
+            return;
+        }
 
-        axios({
-        method: "post",
-        url: "/auth/login",
-        data: data,
-        })
-        .then((res) => {
-            window.location.href = "/home";
-        })
-        .catch((error) => {
-            loginButton.removeAttribute("disabled");
+        try {
+            const response = await axios.post("/auth/login", {
+                email,
+                password,
+            });
 
-            if (error.response && error.response.status === 401) {
-            alert(error.response.data.message);
-            } else {
-            alert("Login failed. Try again.");
-            }
-
-            console.error(error);
-        });
+            alert("Login successful!");
+            // Redirect to homepage after successful login
+            window.location.href = "/";
+        } catch (error) {
+            const message = error.response?.data?.message || "Login failed";
+            alert(message);
+            console.error("Login error:", message);
+        }
     });
 });

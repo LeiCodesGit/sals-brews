@@ -6,21 +6,11 @@
   <link rel="stylesheet" href="../../styles/adminstyles/adminorderstyles.css" />
   <link rel="stylesheet" href="/styles/adminstyles/adminsidebarstyles.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+  <link rel="shortcut icon" href="/assets/SBIcon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="logo">
-      <img src="../../assets/SBhomeLogo.png" alt="Sal's Brews Logo" />
-    </div>
-    <div class="nav">
-      <a href="adminmenu.html" class="tab-link">Menu</a>
-      <a href="adminorders.html" class="tab-link">Orders</a>
-      <a href="adminfeedback.html" class="tab-link">Feedback</a>
-      <a href="adminusers.html" class="tab-link">Accounts</a>
-    </div>
-    <button class="signout">SIGN OUT</button>
-  </div>
+  <!-- Sidebar Partial -->
+<%- include('../partials/adminsidebar', { page: 'orders' }) %>
 
   <!-- Main Content -->
   <div class="main-content">

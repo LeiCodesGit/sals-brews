@@ -2,52 +2,83 @@ const userModal = document.getElementById("userModal");
 const addUserBtn = document.getElementById("addUserBtn");
 const closeModal = document.querySelector(".close");
 const userForm = document.getElementById("userForm");
-const adminTableBody = document.getElementById("adminTableBody");
 const userTableBody = document.getElementById("userTableBody");
-const modalTitle = document.getElementById("modalTitle");
-const toast = document.getElementById("toast");
 
-let editMode = false;
-let editingRow = null;
+let isEditMode = false;
+let editingUserId = null;
 
+// Show Modal for Add
 addUserBtn.onclick = () => {
+  isEditMode = false;
+  editingUserId = null;
+  userModal.style.display = "flex";
   userForm.reset();
   clearErrors();
-  editMode = false;
-  editingRow = null;
-  modalTitle.textContent = "Add User";
-  document.getElementById("accountType").disabled = false;
+  document.getElementById("modalTitle").textContent = "Add User";
   document.getElementById("email").disabled = false;
-  userModal.style.display = "flex";
+  document.getElementById("password").required = true;
+  document.getElementById("confirmPassword").required = true;
 };
 
+// Close Modal
 closeModal.onclick = () => {
   userModal.style.display = "none";
   clearErrors();
+};
+
+// Close if click outside modal
+window.onclick = (e) => {
+  if (e.target === userModal) {
+    userModal.style.display = "none";
+    clearErrors();
+  }
 };
 
 function clearErrors() {
   document.querySelectorAll(".error-message").forEach(el => el.remove());
 }
 
-function showError(id, message) {
-  const input = document.getElementById(id);
+function showError(inputId, message) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
   const error = document.createElement("div");
   error.className = "error-message";
   error.textContent = message;
   error.style.color = "red";
-  error.style.fontSize = "13px";
-  error.style.marginTop = "4px";
   input.parentNode.insertBefore(error, input.nextSibling);
 }
 
-function showToast(msg) {
-  toast.textContent = msg;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2500);
+function renderUsers(users) {
+  userTableBody.innerHTML = "";
+  users.forEach(user => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${user.firstName} ${user.lastName}</td>
+      <td>${user.email}</td>
+      <td>${user.contactNumber}</td>
+      <td>${user.age}</td>
+      <td>${user.address}</td>
+      <td>
+        <button class="edit-btn" data-id="${user._id}">Edit</button>
+        <button class="delete-btn" data-id="${user._id}">Delete</button>
+      </td>
+    `;
+
+    row.querySelector(".edit-btn").onclick = () => openEditModal(user);
+    row.querySelector(".delete-btn").onclick = () => deleteUser(user._id);
+    userTableBody.appendChild(row);
+  });
 }
 
-userForm.addEventListener("submit", function (e) {
+// Fetch all users on load
+async function loadUsers() {
+  const res = await fetch("/users");
+  const users = await res.json();
+  renderUsers(users);
+}
+loadUsers();
+
+userForm.addEventListener("submit", async function (e) {
   e.preventDefault();
   clearErrors();
 
@@ -57,9 +88,8 @@ userForm.addEventListener("submit", function (e) {
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
   const contact = document.getElementById("contact").value.trim();
-  const age = document.getElementById("age").value.trim();
+  const age = parseInt(document.getElementById("age").value);
   const address = document.getElementById("address").value.trim();
-  const accountType = document.getElementById("accountType").value;
 
   let isValid = true;
 
@@ -67,107 +97,94 @@ userForm.addEventListener("submit", function (e) {
   if (!lastName) { showError("lastName", "Last name is required."); isValid = false; }
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || !emailPattern.test(email)) {
-    showError("email", "Enter a valid email.");
-    isValid = false;
-  }
+  if (!email) { showError("email", "Email is required."); isValid = false; }
+  else if (!emailPattern.test(email)) { showError("email", "Invalid email format."); isValid = false; }
 
-  const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-  if (!editMode || password || confirmPassword) {
-    if (!password || !passwordPattern.test(password)) {
-      showError("password", "Min 8 chars, 1 uppercase & number.");
-      isValid = false;
-    }
+  if (!isEditMode || password) {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!password) { showError("password", "Password is required."); isValid = false; }
+    else if (!passwordPattern.test(password)) { showError("password", "Must be 8+ chars, with number and uppercase."); isValid = false; }
 
-    if (!confirmPassword || password !== confirmPassword) {
-      showError("confirmPassword", "Passwords must match.");
-      isValid = false;
-    }
+    if (!confirmPassword) { showError("confirmPassword", "Please confirm password."); isValid = false; }
+    else if (confirmPassword !== password) { showError("confirmPassword", "Passwords do not match."); isValid = false; }
   }
 
   const contactPattern = /^09\d{9}$/;
-  if (!contact || !contactPattern.test(contact)) {
-    showError("contact", "Must be like 09123456789.");
-    isValid = false;
-  }
+  if (!contact) { showError("contact", "Contact is required."); isValid = false; }
+  else if (!contactPattern.test(contact)) { showError("contact", "Format must be 09123456789."); isValid = false; }
 
-  if (!age || parseInt(age) < 18) {
-    showError("age", "Must be 18 or older.");
-    isValid = false;
-  }
+  if (!age) { showError("age", "Age is required."); isValid = false; }
+  else if (age < 18) { showError("age", "Must be at least 18."); isValid = false; }
 
-  if (!address) {
-    showError("address", "Address required.");
-    isValid = false;
-  }
-
-  if (!accountType) {
-    showError("accountType", "Choose account type.");
-    isValid = false;
-  }
+  if (!address) { showError("address", "Address is required."); isValid = false; }
 
   if (!isValid) return;
 
-  const fullName = `${firstName} ${lastName}`;
-  const isMainAdmin = email === "admin@salsbrews.com";
+  const userData = {
+    firstName,
+    lastName,
+    email,
+    contactNumber: contact,
+    age,
+    address,
+  };
 
-  const row = document.createElement("tr");
-  if (accountType === "admin") {
-    row.innerHTML = `
-      <td>${fullName}</td>
-      <td>${email}</td>
-      <td>${contact}</td>
-      <td>${isMainAdmin ? "Main Admin" : "Admin"}</td>
-      <td>
-        <button class="edit-btn">Edit</button>
-        ${!isMainAdmin ? '<button class="delete-btn">Delete</button>' : ''}
-      </td>
-    `;
-    if (isMainAdmin) row.classList.add("main-admin");
-    row.querySelector(".edit-btn").onclick = () => loadUserForEdit(row, "admin");
-    if (!isMainAdmin) row.querySelector(".delete-btn").onclick = () => row.remove();
-    if (editMode && editingRow) editingRow.remove();
-    adminTableBody.appendChild(row);
-  } else {
-    row.innerHTML = `
-      <td>${fullName}</td>
-      <td>${email}</td>
-      <td>${contact}</td>
-      <td>${age}</td>
-      <td>${address}</td>
-      <td>
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </td>
-    `;
-    row.querySelector(".edit-btn").onclick = () => loadUserForEdit(row, "user");
-    row.querySelector(".delete-btn").onclick = () => row.remove();
-    if (editMode && editingRow) editingRow.remove();
-    userTableBody.appendChild(row);
+  if (!isEditMode || password) {
+    userData.password = password;
   }
 
-  showToast(editMode ? "User updated." : "User added.");
-  userModal.style.display = "none";
-  userForm.reset();
-  editMode = false;
-  editingRow = null;
+  try {
+    if (isEditMode) {
+      await fetch(`/users/${editingUserId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData)
+      });
+    } else {
+      await fetch("/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData)
+      });
+    }
+
+    userModal.style.display = "none";
+    userForm.reset();
+    loadUsers();
+  } catch (err) {
+    alert("Error saving user.");
+  }
 });
 
-function loadUserForEdit(row, type) {
-  const cells = row.querySelectorAll("td");
-  const [firstName, ...rest] = cells[0].textContent.split(" ");
-  document.getElementById("firstName").value = firstName;
-  document.getElementById("lastName").value = rest.join(" ");
-  document.getElementById("email").value = cells[1].textContent;
-  document.getElementById("contact").value = cells[2].textContent;
-  document.getElementById("age").value = type === "user" ? cells[3].textContent : "25";
-  document.getElementById("address").value = type === "user" ? cells[4].textContent : "N/A";
-  document.getElementById("accountType").value = type;
-  document.getElementById("accountType").disabled = true;
-  document.getElementById("email").disabled = false;
-
-  modalTitle.textContent = "Edit User";
+function openEditModal(user) {
+  isEditMode = true;
+  editingUserId = user._id;
   userModal.style.display = "flex";
-  editMode = true;
-  editingRow = row;
+  clearErrors();
+
+  document.getElementById("modalTitle").textContent = "Edit User";
+
+  document.getElementById("firstName").value = user.firstName;
+  document.getElementById("lastName").value = user.lastName;
+  document.getElementById("email").value = user.email;
+  document.getElementById("email").disabled = true;
+  document.getElementById("password").value = "";
+  document.getElementById("confirmPassword").value = "";
+  document.getElementById("password").required = false;
+  document.getElementById("confirmPassword").required = false;
+  document.getElementById("contact").value = user.contactNumber;
+  document.getElementById("age").value = user.age;
+  document.getElementById("address").value = user.address;
+}
+
+async function deleteUser(userId) {
+  const confirmDelete = confirm("Are you sure you want to delete this user?");
+  if (!confirmDelete) return;
+
+  try {
+    await fetch(`/users/${userId}`, { method: "DELETE" });
+    loadUsers();
+  } catch (err) {
+    alert("Error deleting user.");
+  }
 }

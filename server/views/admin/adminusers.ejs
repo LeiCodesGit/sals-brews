@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin User Accounts | Sal's Brews</title>
+  <link rel="stylesheet" href="/styles/adminstyles/adminuserstyles.css" />
+  <link rel="stylesheet" href="/styles/adminstyles/adminsidebarstyles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+  <link rel="shortcut icon" href="/assets/SBIcon.ico" type="image/x-icon">
+</head>
+<body>
+
+<!-- Sidebar Partial -->
+<%- include('../partials/adminsidebar', { page: 'users' }) %>
+
+<!-- Main Content -->
+<div class="main-content">
+  <div class="tab-header">User Accounts</div>
+  <button id="addUserBtn" class="add-item-btn">+ Add New User</button>
+
+  <!-- Modals -->
+  <div id="userModal" class="modal">
+    <div class="modal-content" id="modalContent">
+      <span class="close">&times;</span>
+      <h2 id="modalTitle">Add User</h2>
+      <form id="userForm" novalidate>
+        <input type="text" id="firstName" placeholder="First Name"/>
+        <input type="text" id="lastName" placeholder="Last Name"/>
+        <input type="email" id="email" placeholder="Email"/>
+        <input type="password" id="password" placeholder="Password" />
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+        <input type="text" id="contact" placeholder="Contact Number"/>
+        <input type="number" id="age" placeholder="Age"/>
+        <input type="text" id="address" placeholder="Address"/>
+        <select id="accountType">
+          <option value="">-- Select Account Type --</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+        <button id="submitBtn" type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- User List -->
+  <div class="user-list">
+    <h3>Admin Accounts</h3>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Contact</th><th>Role</th><th>Action</th></tr>
+      </thead>
+      <tbody id="adminTableBody">
+        <% users.filter(user => user.userType === "admin").forEach(admin => { %>
+          <tr>
+            <td><%= admin.firstName %> <%= admin.lastName %></td>
+            <td><%= admin.email %></td>
+            <td><%= admin.contactNumber %></td>
+            <td><%= admin.userType %></td>
+            <td>
+              <button class="edit-btn" data-id="<%= admin._id %>">Edit</button>
+              <button class="delete-btn" data-id="<%= admin._id %>">Delete</button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 2rem;">User Accounts</h3>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Contact</th><th>Age</th><th>Address</th><th>Action</th></tr>
+      </thead>
+      <tbody id="userTableBody">
+        <% users.filter(user => user.userType === "customer").forEach(user => { %>
+          <tr>
+            <td><%= user.firstName %> <%= user.lastName %></td>
+            <td><%= user.email %></td>
+            <td><%= user.contactNumber %></td>
+            <td><%= user.age %></td>
+            <td><%= user.address %></td>
+            <td>
+              <button class="edit-btn" data-id="<%= user._id %>">Edit</button>
+              <button class="delete-btn" data-id="<%= user._id %>">Delete</button>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="/admin/adminusers.js"></script>
+</body>
+</html>

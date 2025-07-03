@@ -10,6 +10,10 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    product_image: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: true
@@ -19,7 +23,8 @@ const productSchema = new Schema({
         required: true
     },
     category: {
-        type: String
+        type: String,
+        required: true
     },
     isAvailable: {
         type: Boolean,
