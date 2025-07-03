@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Orders | Sal's Brews</title>
+  <link rel="stylesheet" href="../../styles/adminstyles/adminorderstyles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../../assets/SBhomeLogo.png" alt="Sal's Brews Logo" />
+    </div>
+    <div class="nav">
+      <a href="adminmenu.html" class="tab-link">Menu</a>
+      <a href="adminorders.html" class="tab-link">Orders</a>
+      <a href="adminfeedback.html" class="tab-link">Feedback</a>
+      <a href="adminusers.html" class="tab-link">Accounts</a>
+    </div>
+    <button class="signout">SIGN OUT</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="tab-header">Orders</div>
+
+    <!-- Active Orders -->
+    <div class="orders-section">
+      <h2>Pending Orders</h2>
+      <table class="orders-table" id="ordersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Orders will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Completed / Cancelled Orders -->
+    <div class="orders-section history">
+      <h2>Order History</h2>
+      <table class="orders-table" id="historyTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- History orders will be shown here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../../scripts/adminscripts/adminorders.js"></script>
+</body>
+</html>

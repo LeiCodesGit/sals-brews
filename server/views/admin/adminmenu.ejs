@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Menu | Sal's Brews</title>
+  <link rel="stylesheet" href="/styles/adminstyles/adminmenustyles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Lora&display=swap" />
+</head>
+<body>
+
+  <!-- Sidebar Partial -->
+  <% include ./partials/adminsidebar.ejs %>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="tab-header">Menu</div>
+    <button id="addItemBtn" class="add-item-btn">+ Add New Item</button>
+
+    <!-- Modal -->
+    <div id="addItemModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Add Menu Item</h2>
+        <form id="menuForm">
+          <input type="hidden" id="editIndex" />
+
+          <label for="itemName">Item Name:</label>
+          <input type="text" id="itemName" required />
+
+          <label for="category">Category:</label>
+          <select id="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="coffee">Coffee</option>
+            <option value="non-coffee">Non-Coffee</option>
+            <option value="matcha">Matcha</option>
+            <option value="pastries">Pastries</option>
+          </select>
+
+          <div id="addonsDiv">
+            <label>Add-ons:</label>
+            <div id="addonContainer"></div>
+            <button type="button" class="add-addon-btn" onclick="addAddon()">+ Add Add-on</button>
+          </div>
+
+          <div id="tempOptions">
+            <label>Temperature Options:</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="temperature" value="hot" /> Hot</label>
+              <label><input type="checkbox" name="temperature" value="cold" /> Cold</label>
+            </div>
+          </div>
+
+          <div id="sizeOptions">
+            <label>Available Sizes:</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="size" value="12oz" /> 12 oz (₱0)</label>
+              <label><input type="checkbox" name="size" value="14oz" /> 14 oz (+₱15)</label>
+              <label><input type="checkbox" name="size" value="16oz" /> 16 oz (+₱25)</label>
+            </div>
+          </div>
+
+          <label for="price">Base Item Price (₱):</label>
+          <input type="number" id="price" required />
+
+          <label for="image">Upload Image:</label>
+          <input type="file" id="image" accept="image/*" />
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Menu Grid with Categories -->
+    <div class="menu-grid" id="menuGrid">
+      <div class="category-section" id="coffee-section">
+        <h2 class="category-heading">Coffee</h2>
+        <div class="category-items" id="coffee-items"></div>
+      </div>
+      <div class="category-section" id="non-coffee-section">
+        <h2 class="category-heading">Non-Coffee</h2>
+        <div class="category-items" id="non-coffee-items"></div>
+      </div>
+      <div class="category-section" id="matcha-section">
+        <h2 class="category-heading">Matcha</h2>
+        <div class="category-items" id="matcha-items"></div>
+      </div>
+      <div class="category-section" id="pastries-section">
+        <h2 class="category-heading">Pastries</h2>
+        <div class="category-items" id="pastries-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/scripts/adminscripts/adminmenu.js"></script>
+</body>
+</html>
