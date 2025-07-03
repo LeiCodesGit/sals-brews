@@ -12,12 +12,14 @@ let editingProductId = null;
 let imagePreviewData = "";
 
 // Modal open/close
+
 openBtn.onclick = () => {
   resetForm();
   modal.style.display = "flex";
 };
 
 closeBtn.onclick = () => (modal.style.display = "none");
+
 
 window.onclick = (e) => {
   if (e.target === modal) modal.style.display = "none";
@@ -47,6 +49,7 @@ document.getElementById("menuForm").onsubmit = function (e) {
 
   const name = document.getElementById("itemName").value;
   const category = categorySelect.value;
+  
   const price = parseFloat(document.getElementById("price").value);
 
   const sizeMap = { "12 oz": 0, "14 oz": 15, "16 oz": 25 };
@@ -138,12 +141,13 @@ function renderProductCard(product) {
   const priceTag = document.createElement("span");
   priceTag.className = "price";
   priceTag.textContent = `₱${product.price}`;
-
+  
   const removeBtn = document.createElement("button");
   removeBtn.className = "remove-btn";
   removeBtn.textContent = "Remove";
   removeBtn.onclick = (e) => {
     e.stopPropagation();
+    
     if (confirm("Delete this product?")) {
       fetch(`/products/${product._id}`, { method: "DELETE" })
         .then(res => res.json())
@@ -184,6 +188,7 @@ function editItem(product) {
 }
 
 // Add an add-on row
+    
 function addAddon(name = "", price = "") {
   const container = document.getElementById("addonContainer");
   const group = document.createElement("div");
@@ -204,6 +209,34 @@ function addAddon(name = "", price = "") {
 }
 
 // Reset form and state
+  group.appendChild(nameInput);
+  group.appendChild(priceInput);
+  container.appendChild(group);
+}
+
+function editItem(item) {
+  document.getElementById("modalTitle").textContent = "Edit Menu Item";
+  document.getElementById("itemName").value = item.name;
+  categorySelect.value = item.category;
+  document.getElementById("price").value = item.price;
+  imagePreviewData = item.image || "";
+
+  document.querySelectorAll('input[name="size"]').forEach(cb => {
+    cb.checked = item.sizes.includes(cb.value);
+  });
+
+  document.querySelectorAll('input[name="temperature"]').forEach(cb => {
+    cb.checked = item.temperatures.includes(cb.value);
+  });
+
+  document.getElementById("addonContainer").innerHTML = "";
+  item.addons.forEach(a => addAddon(a.name, a.price));
+
+  categorySelect.dispatchEvent(new Event("change"));
+  editingItem = event.currentTarget;
+  modal.style.display = "flex";
+}
+
 function resetForm() {
   document.getElementById("modalTitle").textContent = "Add Menu Item";
   document.getElementById("menuForm").reset();
