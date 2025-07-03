@@ -52,7 +52,7 @@
       <thead>
         <tr><th>Name</th><th>Email</th><th>Contact</th><th>Role</th><th>Action</th></tr>
       </thead>
-      <tbody>
+      <tbody id="adminTableBody">
         <% users.filter(user => user.userType === "admin").forEach(admin => { %>
           <tr>
             <td><%= admin.firstName %> <%= admin.lastName %></td>
@@ -73,8 +73,8 @@
       <thead>
         <tr><th>Name</th><th>Email</th><th>Contact</th><th>Age</th><th>Address</th><th>Action</th></tr>
       </thead>
-      <tbody>
-        <% users.filter(user => user.userType === "user" || user.userType === "customer").forEach(user => { %>
+      <tbody id="userTableBody">
+        <% users.filter(user => user.userType === "customer").forEach(user => { %>
           <tr>
             <td><%= user.firstName %> <%= user.lastName %></td>
             <td><%= user.email %></td>

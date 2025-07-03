@@ -5,7 +5,7 @@ import User from "../../models/users.js";
 const adminRouter = express.Router();
 
 // GET all users
-adminRouter.get("/usersAccounts", async (req, res) => {
+adminRouter.get("/users", async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -18,32 +18,32 @@ adminRouter.get("/usersAccounts", async (req, res) => {
 adminRouter.post("/users", async (req, res) => {
     try {
         const {
-        userType,
-        firstName,
-        lastName,
-        email,
-        contactNumber,
-        password,
-        age,
-        address
+            userType,
+            firstName,
+            lastName,
+            email,
+            contactNumber,
+            password,
+            age,
+            address
         } = req.body;
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-        return res.status(409).json({ message: "Email already exists" });
+            return res.status(409).json({ message: "Email already exists" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
-        userType,
-        firstName,
-        lastName,
-        email,
-        contactNumber,
-        password: hashedPassword,
-        age,
-        address,
+            userType,
+            firstName,
+            lastName,
+            email,
+            contactNumber,
+            password: hashedPassword,
+            age,
+            address
         });
 
         await newUser.save();
@@ -51,6 +51,27 @@ adminRouter.post("/users", async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: "Error creating user", error: err.message });
+    }
+});
+
+// PUT edit user
+adminRouter.put("/users/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const update = { ...req.body };
+
+        if (update.password) {
+            update.password = await bcrypt.hash(update.password, 10);
+        } else {
+            delete update.password;
+        }
+
+        const user = await User.findByIdAndUpdate(id, update, { new: true });
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.json({ message: "User updated", user });
+    } catch (err) {
+        res.status(500).json({ message: "Error updating user", error: err.message });
     }
 });
 
@@ -63,15 +84,20 @@ adminRouter.delete("/users/:id", async (req, res) => {
         if (!deleted) return res.status(404).json({ message: "User not found" });
 
         res.json({ message: "User deleted successfully" });
-
     } catch (err) {
         res.status(500).json({ message: "Error deleting user", error: err.message });
     }
 });
 
-// Render EJS views
-adminRouter.get("/adminusers", (req, res) => {
-    res.render("admin/adminusers");
+// Render admin pages
+adminRouter.get("/adminusers", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.render("admin/adminusers", { users });
+    } catch (err) {
+        console.error("Error rendering adminusers:", err);
+        res.status(500).send("Error loading admin users");
+    }
 });
 
 adminRouter.get("/adminmenu", (req, res) => {
