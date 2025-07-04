@@ -8,10 +8,10 @@ const cartRouter = express.Router();
 // All routes below require user to be logged in
 cartRouter.use(redirectIfNotLoggedIn);
 
-// GET cart for the logged-in usert
+// GET cart for the logged-in user
 cartRouter.get("/", async (req, res) => {
     try {
-        const cart = await Cart.findOne({ userId: req.session.user.id }).populate("items.productId");
+        const cart = await Cart.findOne({ user_id: req.session.user.id }).populate("items.productId");
         if (!cart) return res.status(404).json({ message: "Cart not found" });
         res.json(cart);
     } catch (err) {
@@ -21,13 +21,7 @@ cartRouter.get("/", async (req, res) => {
 
 // POST add item to cart
 cartRouter.post("/", async (req, res) => {
-    const {
-        productId,
-        quantity,
-        selectedSize,
-        selectedTemp,
-        selectedAddons,
-    } = req.body;
+    const { productId, quantity, selectedSize, selectedTemp, selectedAddons} = req.body;
 
     try {
         let cart = await Cart.findOne({ user_id: req.session.user.id });
@@ -42,45 +36,32 @@ cartRouter.post("/", async (req, res) => {
         const basePrice = product.price;
         const totalPrice = (basePrice + sizePrice + addonPrice) * quantity;
 
-        const newItem = {
-        productId,
-        quantity,
-        selectedSize,
-        selectedTemp,
-        selectedAddons,
-        totalPrice
-        };
+        const newItem = { productId, quantity, selectedSize, selectedTemp, selectedAddons, totalPrice };
 
         if (!cart) {
-        cart = new Cart({
+            cart = new Cart({
             user_id: req.session.user.id,
             items: [newItem]
-        });
+            });
         } else {
-        cart.items.push(newItem);
+            cart.items.push(newItem);
         }
 
         await cart.save();
         res.status(200).json({ message: "Item added to cart", cart });
 
     } catch (err) {
-        console.error("❌ Error saving to cart:", err);
+        console.error("Error saving to cart:", err);
         res.status(500).json({ message: "Failed to add to cart", error: err.message });
     }
-    });
+});
 
 
 
 
 // PUT update quantity of an item
 cartRouter.put("/", async (req, res) => {
-    const {
-        productId,
-        quantity,
-        selectedSize,
-        selectedTemp,
-        selectedAddons
-    } = req.body;
+    const { productId, quantity, selectedSize, selectedTemp, selectedAddons } = req.body;
 
     try {
         const cart = await Cart.findOne({ userId: req.session.user.id });

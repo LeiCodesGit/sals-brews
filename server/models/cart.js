@@ -10,7 +10,7 @@ const cartItemSchema = new Schema({
 });
 
 const cartSchema = new Schema({
-    user_id: { type: String, required: true },
+    user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
     items: [cartItemSchema],
     created_at: { type: Date, default: Date.now },
     isCheckedOut: { type: Boolean, default: false }

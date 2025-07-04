@@ -32,12 +32,12 @@
             <% }) %>
         </div>
         <% } %>
-
-        <% if (item.sizes?.length) { %>
-        <p>Size Options:</p>
-        <% item.sizes.forEach(size => { %>
-            <button data-label="<%= size.label %>"><%= size.label %> (+₱<%= size.price %>)</button>
-            <% }) %>
+        <div class="option-group" data-group="size">
+            <% if (item.sizes?.length) { %>
+            <p>Size Options:</p>
+            <% item.sizes.forEach(size => { %>
+                <button data-label="<%= size.label %>"><%= size.label %> (+₱<%= size.price %>)</button>
+                <% }) %>
         </div>
         <% } %>
 
@@ -129,14 +129,14 @@
             : { message: await res.text() };
 
         if (res.ok) {
-            alert("✅ " + data.message);
+            alert(data.message);
         } else {
-            alert("⚠️ Failed to add item: " + data.message);
+            alert("Failed to add item: " + data.message);
         }
-        } catch (err) {
-        console.error("❌ Error:", err);
-        alert("🚫 Something went wrong. Check the console.");
-        }
+    } catch (err) {
+        console.error("Error:", err);
+        alert("Something went wrong. Check the console.");
+    }
     }
 
 </script>
