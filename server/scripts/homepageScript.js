@@ -1,4 +1,4 @@
-    const categories = ['coffee', 'non-coffee', 'pastries'];
+    const categories = ['coffee', 'non-coffee','matcha', 'pastries'];
     let currentIndex = 0;
 
 

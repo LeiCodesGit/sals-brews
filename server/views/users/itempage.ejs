@@ -1,111 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <%- include('../partials/head') %>
-
-
-    <link rel="stylesheet" href="/styles/itempageStyles.css">
+<%- include('../partials/head') %>
+<link rel="stylesheet" href="/styles/itempageStyles.css">
 </head>
 <body>
 
-        <%- include('../partials/navbar') %>
+<%- include('../partials/navbar') %>
 
-    <!-- Item Section -->
-    <div class="item-page">
-        <div class="item-image">
-            <img src="/assets/mocha.png" alt="Cafe Mocha">
-        </div>
-
-        <div class="item-details">
-            <h2>CAFE MOCHA</h2>
-            <p class="price">₱140.00</p>
-
-            <div class="options">
-                <p>Choice of:</p>
-                <div class="option-group" data-group="temperature">
-                    <button>Hot</button>
-                    <button>Iced</button>
-                </div>
-
-                <p>Sweetness Level :</p>
-                <div class="option-group" data-group="sweetness">
-                    <button>50%</button>
-                    <button>75%</button>
-                    <button>Normal</button>
-                </div>
-
-                <p>Size Options:</p>
-                <div class="option-group" data-group="size">
-                    <button>12 oz</button>
-                    <button>14 oz</button>
-                    <button>16 oz</button>
-                </div>
-
-                <p>Add-ons:</p>
-                <div class="option-group" data-group="addons">
-                    <button>Espresso</button>
-                    <button>Sub Oat</button>
-                    <button>None</button>
-                </div>
-            </div>
-
-            <div class="note-section">
-                <label for="orderNote">Note to Cafe (Optional):</label><br>
-                <textarea id="orderNote" name="orderNote" rows="4" placeholder="E.g. Less ice..."></textarea>
-            </div>
-
-            <div class="quantity">
-                <p>Quantity:</p>
-                <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
-                <span class="qty-value" id="quantityValue">1</span>
-                <button class="qty-btn" onclick="updateQuantity(1)">+</button>
-            </div>
-
-            <div class="action-buttons">
-                <button class="add-to-cart">Add to Cart</button>
-                <button class="reset-btn" onclick="resetForm()">Reset</button>
-                <a href="/" class="cancel-btn">Cancel</a>
-            </div>
-        </div>
+<!-- Item Section -->
+<div class="item-page">
+    <div class="item-image">
+    <img src="<%= item.product_image || '/assets/default-placeholder.png' %>" alt="<%= item.product_name %>">
     </div>
 
-    <!-- Script -->
-    <script>
-        let quantity = 1;
+    <div class="item-details">
+    <h2><%= item.product_name %></h2>
+    <p class="price">₱<%= item.price %></p>
 
-        function updateQuantity(change) {
-            quantity += change;
-            if (quantity < 1) quantity = 1;
-            document.getElementById("quantityValue").textContent = quantity;
+    <div class="options">
+
+        <% if (item.temperature_options?.length) { %>
+        <p>Choice of:</p>
+        <div class="option-group" data-group="temperature">
+            <% item.temperature_options.forEach(temp => { %>
+            <button><%= temp %></button>
+            <% }) %>
+        </div>
+        <% } %>
+        <div class="option-group" data-group="size">
+            <% if (item.sizes?.length) { %>
+            <p>Size Options:</p>
+            <% item.sizes.forEach(size => { %>
+                <button data-label="<%= size.label %>"><%= size.label %> (+₱<%= size.price %>)</button>
+                <% }) %>
+        </div>
+        <% } %>
+
+        <% if (item.addons?.length) { %>
+        <p>Add-ons:</p>
+        <div class="option-group" data-group="addons">
+            <% item.addons.forEach(addon => { %>
+            <button data-name="<%= addon.name %>"><%= addon.name %> (+₱<%= addon.price %>)</button>
+            <% }) %>
+        </div>
+        <% } %>
+
+    </div>
+
+    <div class="quantity">
+        <p>Quantity:</p>
+        <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+        <span class="qty-value" id="quantityValue">1</span>
+        <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+    </div>
+
+    <div class="action-buttons">
+        <button class="add-to-cart" onclick="addToCart('<%= item._id %>')">Add to Cart</button>
+        <button class="reset-btn" onclick="resetForm()">Reset</button>
+        <a href="/home" class="cancel-btn">Cancel</a>
+    </div>
+    </div>
+</div>
+
+<!-- Script -->
+<script>
+    let quantity = 1;
+
+    function updateQuantity(change) {
+    quantity += change;
+    if (quantity < 1) quantity = 1;
+    document.getElementById("quantityValue").textContent = quantity;
+    }
+
+    // Selection logic for button groups
+    document.querySelectorAll('.option-group').forEach(group => {
+    group.addEventListener('click', function (e) {
+        if (e.target.tagName === 'BUTTON') {
+        [...group.children].forEach(btn => btn.classList.remove('selected'));
+        e.target.classList.add('selected');
         }
+    });
+    });
 
-        // Selection logic for button groups
-        document.querySelectorAll('.option-group').forEach(group => {
-            group.addEventListener('click', function (e) {
-                if (e.target.tagName === 'BUTTON') {
-                    [...group.children].forEach(btn => btn.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-            });
+    function resetForm() {
+    quantity = 1;
+    document.getElementById("quantityValue").textContent = quantity;
+
+    document.querySelectorAll('.option-group button').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+
+    document.getElementById("orderNote").value = "";
+    }
+
+    async function addToCart(productId) {
+    const quantity = parseInt(document.getElementById("quantityValue").textContent);
+
+    // Get selected size, temp, addons
+    const selectedSize = document.querySelector('[data-group="size"] .selected')?.dataset.label;
+    const selectedTemp = document.querySelector('[data-group="temperature"] .selected')?.textContent.trim();
+    const selectedAddons = [...document.querySelectorAll('[data-group="addons"] .selected')]
+    .map(btn => btn.dataset.name);
+
+
+    try {
+        const res = await fetch("/api/cart", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+            productId,
+            quantity,
+            selectedSize,
+            selectedTemp,
+            selectedAddons
+            }),
         });
 
-        function resetForm() {
-            // Reset quantity
-            quantity = 1;
-            document.getElementById("quantityValue").textContent = quantity;
+        const contentType = res.headers.get("content-type");
+        const data = contentType.includes("application/json")
+            ? await res.json()
+            : { message: await res.text() };
 
-            // Remove all selected option buttons
-            document.querySelectorAll('.option-group button').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            // Clear note
-            document.getElementById("orderNote").value = "";
+        if (res.ok) {
+            alert(data.message);
+        } else {
+            alert("Failed to add item: " + data.message);
         }
-    </script>
+    } catch (err) {
+        console.error("Error:", err);
+        alert("Something went wrong. Check the console.");
+    }
+    }
+
+</script>
 </body>
 </html>

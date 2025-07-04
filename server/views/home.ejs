@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <%- include('partials/head') %>
+  <link rel="stylesheet" href="/styles/homepageStyles.css" />
+</head>
+<body>
+<%- include('partials/navbar') %>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <img src="/assets/SBbackgroundIntro.png" alt="Intro Background" class="intro-img">
+  <div class="intro-content">
+    <img src="/assets/SBLogoLight.png" alt="Logo">
+    <h2>"A cozy café serving handcrafted coffee, fresh pastries, and warm vibes—perfect for your daily pick-me-up or a relaxing break."</h2>
+    <div class="socials">
+      <a class="socialsLink" href="https://www.facebook.com/"><img src="/assets/facebook.png" alt="Facebook Icon"></a>
+      <a class="socialsLink" href="https://www.instagram.com/"><img src="/assets/instagram.png" alt="Instagram Icon"></a>
+      <a class="socialsLink" href="https://maps.app.goo.gl/QytMACYMGZeS2e4S7"><img src="/assets/map.png" alt="Google Maps Icon"></a>
+    </div>
+    <button class="order-btn">Order Now</button>
+  </div>
+</section>
+
+<!-- Menu Section -->
+<section class="menu-section">
+  <h2 class="menu-title">MENU</h2>
+
+  <!-- Best Sellers -->
+  <div class="best-sellers">
+    <h3>Best Sellers</h3>
+    <div class="menu-grid" id="best-sellers">
+      <% products.forEach(p => { if (p.isBestSeller) { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="menu-categories">
+    <div class="tabs">
+      <span class="tab active">Coffee</span>
+      <span class="tab">Non-Coffee</span>
+      <span class="tab">Matcha</span> 
+      <span class="tab">Pastries</span>
+    </div>
+
+    <div class="menu-grid" id="coffee">
+      <% products.forEach(p => { if (p.category === "coffee") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+
+    <div class="menu-grid-noncoffee hidden" id="non-coffee">
+      <% products.forEach(p => { if (p.category === "non-coffee") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+
+    <div class="menu-grid-matcha hidden" id="matcha">
+      <% products.forEach(p => { if (p.category === "matcha") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+
+
+
+    <div class="menu-grid-pastries hidden" id="pastries">
+      <% products.forEach(p => { if (p.category === "pastries") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+  </div>
+</section>
+
+<script>
+  const categories = ['coffee', 'non-coffee','matcha','pastries'];
+  let currentIndex = 0;
+
+  function updateMenuDisplay() {
+    categories.forEach((id, index) => {
+      document.getElementById(id).classList.toggle('hidden', index !== currentIndex);
+    });
+
+    const tabs = document.querySelectorAll('.tabs .tab');
+    tabs.forEach((tab, index) => {
+      tab.classList.toggle('active', index === currentIndex);
+    });
+  }
+
+  document.querySelectorAll('.tabs .tab').forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      currentIndex = index;
+      updateMenuDisplay();
+    });
+  });
+
+  updateMenuDisplay();
+</script>
+
+</body>
+</html>
