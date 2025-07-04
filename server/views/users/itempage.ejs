@@ -130,6 +130,7 @@
 
         if (res.ok) {
             alert(data.message);
+            window.location.href = "/users/cart";
         } else {
             alert("Failed to add item: " + data.message);
         }

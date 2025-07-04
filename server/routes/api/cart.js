@@ -103,4 +103,14 @@ cartRouter.delete("/", async (req, res) => {
     }
 });
 
+cartRouter.get("/cart", redirectIfNotLoggedIn, async (req, res) => {
+    try {
+        const cart = await Cart.findOne({ user_id: req.session.user.id }).populate("items.productId");
+        res.render("users/cart", { cart: cart || { items: [] } });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to load cart");
+    }
+});
+
 export default cartRouter;

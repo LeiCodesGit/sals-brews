@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import connect from "./database/mongodb-connect.js";
 import  session from "express-session";
 import MongoStore from "connect-mongo";
+import redirectIfNotLoggedIn from "./middlewares/redirectIfNotLoggedIn.js";
+import Cart from "./models/cart.js";
 
 // Load environment variables
 dotenv.config();
@@ -77,7 +79,7 @@ app.use("/products", productRouter);
 app.use("/itempage", itemRouter);
 app.use("/home", homeRouter);
 app.use("/api/cart", cartRouter);
-
+app.use("/users", cartRouter);
 
 // Default/home route
 app.get("/", (req, res) => {
@@ -88,16 +90,17 @@ app.get('/menu', (req, res) => {
     res.render('users/menu');
 });
 
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Login: http://localhost:${port}/auth/login`);
+});
+
 app.get('/cart', (req, res) => {
     res.render('users/cart');
 });
 
 app.get('/orderinfo', (req, res) => {
     res.render('users/orderinformation');
-});
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
 });
 
 
