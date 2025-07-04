@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("addItemModal");
   const openBtn = document.getElementById("addItemBtn");
   const closeBtn = document.querySelector(".close");
+  const addonsBtn = document.getElementById("addAddonBtn");
 
   const categorySelect = document.getElementById("category");
   const tempDiv = document.getElementById("tempOptions");
@@ -10,6 +11,37 @@ window.addEventListener("DOMContentLoaded", () => {
 
   let editingItem = null;
   let imagePreviewData = "";
+
+  addonsBtn.onclick = () => {
+    const container = document.getElementById("addonContainer");
+
+  const group = document.createElement("div");
+  group.className = "addon-group";
+
+  const nameInput = document.createElement("input");
+  nameInput.type = "text";
+  nameInput.placeholder = "Add-on Name";
+  nameInput.required = true;
+
+  const priceInput = document.createElement("input");
+  priceInput.type = "number";
+  priceInput.placeholder = "₱";
+  priceInput.step = "0.01";
+  priceInput.min = "0";
+  priceInput.required = true;
+
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.textContent = "❌";
+  removeBtn.className = "remove-addon-btn";
+  removeBtn.onclick = () => group.remove();
+
+  group.appendChild(nameInput);
+  group.appendChild(priceInput);
+  group.appendChild(removeBtn);
+
+  container.appendChild(group);
+  }
 
   // Show modal
   openBtn.onclick = () => {

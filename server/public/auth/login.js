@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (user.userType === "admin") {
                 window.location.href = "/admin/adminmenu";
             } else {
-                window.location.href = "/";
+                window.location.href = "/home";
             }
         } catch (error) {
             const message = error.response?.data?.message || "Login failed";
