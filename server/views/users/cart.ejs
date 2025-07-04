@@ -19,8 +19,6 @@
     <%- include('../partials/navbar') %>
         <div class="page-wrapper">
             <div id="content">
-
-
                 <div id="table">
                     <h1>Your Cart</h1>
                     <table>
@@ -32,20 +30,37 @@
                                 <th>Total</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="items">
-                                        <img src="../assets/mocha.png" alt="mocha">
-                                        <p>Mocha</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    Iced, 50%, 12oz
-                                </td>
-                                <td>1</td>
-                                <td>₱140.00</td>
-                            </tr>
+                        <tbody id="cartItems">
+                            <% cart.items.forEach(item => { %>
+                                <tr>
+                                    <!-- Product Image + Name -->
+                                    <td>
+                                    <img src="<%= item.productId.product_image || '/assets/default-placeholder.png' %>" 
+                                        alt="<%= item.productId.product_name %>" 
+                                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                    <p><%= item.productId.product_name %></p>
+                                    </td>
+
+                                    <!-- Selected Options -->
+                                    <td>
+                                    <% if (item.selectedSize) { %>
+                                        <p>Size: <%= item.selectedSize %></p>
+                                    <% } %>
+                                    <% if (item.selectedTemp) { %>
+                                        <p>Temp: <%= item.selectedTemp %></p>
+                                    <% } %>
+                                    <% if (item.selectedAddons && item.selectedAddons.length) { %>
+                                        <p>Add-ons: <%= item.selectedAddons.join(", ") %></p>
+                                    <% } %>
+                                    </td>
+
+                                    <!-- Quantity -->
+                                    <td><%= item.quantity %></td>
+
+                                    <!-- Total Price -->
+                                    <td>₱<%= item.totalPrice.toFixed(2) %></td>
+                                </tr>
+                            <% }) %>
                         </tbody>
                     </table>
                 </div>
