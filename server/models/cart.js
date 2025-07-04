@@ -1,25 +1,19 @@
 import { Schema, model } from "mongoose";
 
+const cartItemSchema = new Schema({
+    productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+    quantity: { type: Number, default: 1 },
+    selectedSize: { type: String },
+    selectedTemp: { type: String },
+    selectedAddons: [{ type: String }],
+    totalPrice: { type: Number },
+});
+
 const cartSchema = new Schema({
-    cart_id: { 
-        type: String, 
-        required: true, 
-        unique: true 
-    },
-
-    user_id: { 
-        type: String, 
-        required: true 
-    },
-    created_at: { 
-        type: Date, 
-        default: Date.now 
-    },
-
-    isCheckedOut: { 
-        type: Boolean, 
-        default: false 
-    }
+    user_id: { type: String, required: true },
+    items: [cartItemSchema],
+    created_at: { type: Date, default: Date.now },
+    isCheckedOut: { type: Boolean, default: false }
 });
 
 export default model("Cart", cartSchema);

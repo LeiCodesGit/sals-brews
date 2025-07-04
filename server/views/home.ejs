@@ -1,155 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <%- include('partials/head') %>
-    <link rel="stylesheet" href="/styles/homepageStyles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <%- include('partials/head') %>
+  <link rel="stylesheet" href="/styles/homepageStyles.css" />
 </head>
 <body>
 <%- include('partials/navbar') %>
-    <!-- Intro Section -->
-    <section class="intro-section">
-        <img src="/assets/SBbackgroundIntro.png" alt="Intro Background" class="intro-img">
-        <div class="intro-content">
-            <img src="/assets/SBLogoLight.png" alt="Logo">
-            <h2>"A cozy café serving handcrafted coffee, fresh pastries, and warm vibes—perfect for your daily pick-me-up or a relaxing break."</h2>
-            <div class="socials">
-                <a class="socialsLink" href="https://www.facebook.com/"><img src="../assets/facebook.png" alt="Facebook Icon"></a>
-                <a class="socialsLink" href="https://www.instagram.com/"><img src="../assets/instagram.png" alt="Instagram Icon"></a>
-                <a class="socialsLink" href="https://maps.app.goo.gl/QytMACYMGZeS2e4S7"><img src="../assets/map.png" alt="Google Maps Icon"></a>
-            </div>
-            <button class="order-btn">Order Now</button>
+
+<!-- Intro Section -->
+<section class="intro-section">
+  <img src="/assets/SBbackgroundIntro.png" alt="Intro Background" class="intro-img">
+  <div class="intro-content">
+    <img src="/assets/SBLogoLight.png" alt="Logo">
+    <h2>"A cozy café serving handcrafted coffee, fresh pastries, and warm vibes—perfect for your daily pick-me-up or a relaxing break."</h2>
+    <div class="socials">
+      <a class="socialsLink" href="https://www.facebook.com/"><img src="/assets/facebook.png" alt="Facebook Icon"></a>
+      <a class="socialsLink" href="https://www.instagram.com/"><img src="/assets/instagram.png" alt="Instagram Icon"></a>
+      <a class="socialsLink" href="https://maps.app.goo.gl/QytMACYMGZeS2e4S7"><img src="/assets/map.png" alt="Google Maps Icon"></a>
+    </div>
+    <button class="order-btn">Order Now</button>
+  </div>
+</section>
+
+<!-- Menu Section -->
+<section class="menu-section">
+  <h2 class="menu-title">MENU</h2>
+
+  <!-- Best Sellers -->
+  <div class="best-sellers">
+    <h3>Best Sellers</h3>
+    <div class="menu-grid" id="best-sellers">
+      <% products.forEach(p => { if (p.isBestSeller) { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
         </div>
-    </section>
+      <% } }) %>
+    </div>
+  </div>
 
-    <!-- Menu Section -->
-    <section class="menu-section">
-        <h2 class="menu-title">MENU</h2>
+  <!-- Categories -->
+  <div class="menu-categories">
+    <div class="tabs">
+      <span class="tab active">Coffee</span>
+      <span class="tab">Non-Coffee</span>
+      <span class="tab">Pastries</span>
+    </div>
 
-        <!-- Best Sellers -->
-        <div class="best-sellers">
-            <h3>Best Sellers</h3>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <img src="/assets/mocha.png" alt="Cafe Mocha">
-                    <p>Café Mocha</p>
-                    <p style="padding-top: 18px;">₱160</p>
-                    <button class="buy-btn">BUY NOW</button>
-                </div>
-                <div class="menu-item">
-                    <img src="/assets/spanishlatte.png" alt="Spanish Latte">
-                    <p>Spanish Latte</p>
-                    <p style="padding-top: 18px;">₱140</p>
-                    <button class="buy-btn">BUY NOW</button>
-                </div>
-                <div class="menu-item">
-                    <img src="/assets/matchalatte.png" alt="Matcha Latte">
-                    <p>Cerimonial Matcha Latte</p>
-                    <p>₱160</p>
-                    <button class="buy-btn">BUY NOW</button>
-                </div>
-                <div class="menu-item">
-                    <img src="/assets/panau.png" alt="Pain au Chocolat">
-                    <p>Pain au Chocolat</p>
-                    <p style="padding-top: 18px;">₱80</p>
-                    <button class="buy-btn">BUY NOW</button>
-                </div>
-            </div>
+    <div class="menu-grid" id="coffee">
+      <% products.forEach(p => { if (p.category === "coffee") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
         </div>
+      <% } }) %>
+    </div>
 
-        <!-- Categories -->
-        <div class="menu-categories">
-            <div class="tabs">
-                <span class="tab active">Coffee</span>
-                <span class="tab">Non-Coffee</span>
-                <span class="tab">Pastries</span>
-            </div>
-
-            <div class="menu-grid" id="coffee">
-
-                <!--buttonleft-->
-                
-                <div class="menu-item"><img src="/assets/americano.png"><p>Americano</p><p style="padding-top: 18px;">₱120</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <div class="menu-item"><img src="/assets/cafelatte.png"><p>Cafe Latte</p><p style="padding-top: 18px;">₱140</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <div class="menu-item"><img src="/assets/spanishlatte.png"><p>Spanish Latte</p><p style="padding-top: 18px;">₱150</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <div class="menu-item"><img src="/assets/mocha.png"><p>Caffe Mocha</p><p style="padding-top: 18px;">₱160</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <div class="menu-item"><img src="/assets/dirtymatcha.png"><p>Dirty Matcha</p><p style="padding-top: 18px;">₱175</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <div class="menu-item"><img src="/assets/caramel macchiato.png"><p>Caramel Macchiato</p><p >₱160</p>
-                    <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                <!--buttonright-->
-            
-            </div>
-
-                <div class="menu-grid-noncoffee hidden" id="non-coffee">
-                    
-            
-                    <div class="menu-item"><img src="/assets/honeyicedtea.png"><p>Honey Iced Tea</p><p style="padding-top: 18px;">₱180</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/chailatte.png"><p>Chai Latte</p><p style="padding-top: 18px;">₱170</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/strawberrymatcha.png"><p>Strawberry Matcha Latte</p><p>₱210</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/matchalatte.png"><p>Cerimonial Matcha Latte</p><p>₱190</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    
-                
-                </div>
-
-                <div class="menu-grid-pastries hidden" id="pastries">
-                    
-                
-                    <div class="menu-item"><img src="/assets/redvelvet.png"><p>Red Velvet Cookie</p><p >₱90</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/chocolatechip.png"><p>Chocolate Chip Cookie</p><p>₱90</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/croissant.png"><p>Croissant</p><p style="padding-top: 18px;">₱180</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/panau.png"><p>Pan au Chocolat</p><p style="padding-top: 18px;">₱200</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                    <div class="menu-item"><img src="/assets/cinnamonroll.png"><p>Cinnamon Roll</p><p style="padding-top: 18px;">₱150</p>
-                        <a href="/itempage" class="buy-btn">BUY NOW</a></div>
-                
-                
-                </div>
+    <div class="menu-grid-noncoffee hidden" id="non-coffee">
+      <% products.forEach(p => { if (p.category === "non-coffee") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
         </div>
-    </section>
+      <% } }) %>
+    </div>
+
+    <div class="menu-grid-pastries hidden" id="pastries">
+      <% products.forEach(p => { if (p.category === "pastries") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+  </div>
+</section>
+
 <script>
-        const categories = ['coffee', 'non-coffee', 'pastries'];
-    let currentIndex = 0;
+  const categories = ['coffee', 'non-coffee', 'pastries'];
+  let currentIndex = 0;
 
-
-    function updateMenuDisplay() {
-        categories.forEach((id, index) => {
-            document.getElementById(id).classList.toggle('hidden', index !== currentIndex);
-        });
-
-        const tabs = document.querySelectorAll('.tabs .tab');
-        tabs.forEach((tab, index) => {
-            tab.classList.toggle('active', index === currentIndex);
-        });
-    }
-
-    document.querySelectorAll('.tabs .tab').forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-            currentIndex = index;
-            updateMenuDisplay();
-        });
+  function updateMenuDisplay() {
+    categories.forEach((id, index) => {
+      document.getElementById(id).classList.toggle('hidden', index !== currentIndex);
     });
 
+    const tabs = document.querySelectorAll('.tabs .tab');
+    tabs.forEach((tab, index) => {
+      tab.classList.toggle('active', index === currentIndex);
+    });
+  }
 
-    updateMenuDisplay();
+  document.querySelectorAll('.tabs .tab').forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      currentIndex = index;
+      updateMenuDisplay();
+    });
+  });
+
+  updateMenuDisplay();
 </script>
+
 </body>
-
 </html>
-
-
-
-
