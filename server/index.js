@@ -67,10 +67,16 @@ import authRouter from "./routes/auth/routes.js";
 import adminRouter from "./routes/admin/routes.js";
 import productRouter from "./routes/products.js";
 import cartRouter from "./routes/api/cart.js";
+import homeRouter from "./routes/home.js"; 
+import itemRouter from "./routes/api/item.js";
+
 
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/products", productRouter);
+app.use("/itempage", itemRouter);
+app.use("/home", homeRouter);
+app.use("/api/cart", cartRouter);
 
 
 // Default/home route

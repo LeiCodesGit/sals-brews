@@ -150,6 +150,16 @@ body {
     justify-content: center;
 }
 
+.menu-grid-matcha {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .menu-item {
     background-color: #3c2415;
     padding: 15px;
@@ -213,33 +223,6 @@ body {
     border-bottom:2px solid #47532b;
 }
 
-.arrowbtn{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: #733015;
-    transition: all 0.3s ease;
-    display: flex;
-    float: right;
-    align-items: center;
-}
-
-.arrowbtn2{
- background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: #733015;
-    transition: all 0.3s ease;
-    display: flex;
-    float: left;
-    align-items: center;
-}
-
-.arrowbtn:hover, .arrowbtn2:hover {
-    transform: scale(1.25);
-}
 
 .hidden {
     display: none;
