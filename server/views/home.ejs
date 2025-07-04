@@ -49,6 +49,7 @@
     <div class="tabs">
       <span class="tab active">Coffee</span>
       <span class="tab">Non-Coffee</span>
+      <span class="tab">Matcha</span> 
       <span class="tab">Pastries</span>
     </div>
 
@@ -74,6 +75,19 @@
       <% } }) %>
     </div>
 
+    <div class="menu-grid-matcha hidden" id="matcha">
+      <% products.forEach(p => { if (p.category === "matcha") { %>
+        <div class="menu-item">
+          <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">
+          <p><%= p.product_name %></p>
+          <p style="padding-top: 18px;">₱<%= p.price %></p>
+          <a href="/itempage/<%= p._id %>" class="buy-btn">BUY NOW</a>
+        </div>
+      <% } }) %>
+    </div>
+
+
+
     <div class="menu-grid-pastries hidden" id="pastries">
       <% products.forEach(p => { if (p.category === "pastries") { %>
         <div class="menu-item">
@@ -88,7 +102,7 @@
 </section>
 
 <script>
-  const categories = ['coffee', 'non-coffee', 'pastries'];
+  const categories = ['coffee', 'non-coffee','matcha','pastries'];
   let currentIndex = 0;
 
   function updateMenuDisplay() {
