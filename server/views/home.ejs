@@ -75,7 +75,7 @@
       <% } }) %>
     </div>
 
-    <div class="menu-grid-matcha hidden" id="matcha">
+    <div class="menu-grid hidden" id="matcha">
       <% products.forEach(p => { if (p.category === "matcha") { %>
         <div class="menu-item">
           <img src="<%= p.product_image || '/assets/default-placeholder.png' %>" alt="<%= p.product_name %>">

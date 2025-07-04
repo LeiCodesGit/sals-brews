@@ -1,4 +1,3 @@
-// public/js/home.js (or wherever you store JS files)
 document.addEventListener("DOMContentLoaded", async () => {
   const categories = ['coffee', 'non-coffee', 'pastries'];
   let currentIndex = 0;

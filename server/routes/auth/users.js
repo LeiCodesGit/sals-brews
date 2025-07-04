@@ -1,11 +1,12 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../../models/users.js";
+import redirectIfLoggedIn from "../../middlewares/redirectIfLoggedIn.js";
 
 const authRouter = express.Router();
 
 // Render login and register pages
-authRouter.get("/login", (req, res) => {
+authRouter.get("/login",redirectIfLoggedIn, (req, res) => {
     res.render("auth/login");
 });
 
@@ -14,7 +15,7 @@ authRouter.get("/register", (req, res) => {
 });
 
 // Handle user registration
-authRouter.post("/register", async (req, res) => {
+authRouter.post("/register",redirectIfLoggedIn, async (req, res) => {
     const {
         userType,
         firstName,

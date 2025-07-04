@@ -1,11 +1,13 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../../models/users.js";
+import failIfUnauthorizedAdmin from "../../middlewares/failIfUnauthorizedAdmin.js"; 
+import redirectIfNotLoggedIn from "../../middlewares/redirectIfNotLoggedIn.js";
 
 const adminRouter = express.Router();
 
-// GET all users
-adminRouter.get("/users", async (req, res) => {
+// GET all users 
+adminRouter.get("/users", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -14,8 +16,8 @@ adminRouter.get("/users", async (req, res) => {
     }
 });
 
-// POST add user
-adminRouter.post("/users", async (req, res) => {
+// POST add user 
+adminRouter.post("/users", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, async (req, res) => {
     try {
         const {
             userType,
@@ -54,8 +56,8 @@ adminRouter.post("/users", async (req, res) => {
     }
 });
 
-// PUT edit user
-adminRouter.put("/users/:id", async (req, res) => {
+// PUT edit user 
+adminRouter.put("/users/:id", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         const update = { ...req.body };
@@ -75,8 +77,8 @@ adminRouter.put("/users/:id", async (req, res) => {
     }
 });
 
-// DELETE user
-adminRouter.delete("/users/:id", async (req, res) => {
+// DELETE user 
+adminRouter.delete("/users/:id", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, async (req, res) => {
     try {
         const userId = req.params.id;
         const deleted = await User.findByIdAndDelete(userId);
@@ -89,8 +91,8 @@ adminRouter.delete("/users/:id", async (req, res) => {
     }
 });
 
-// Render admin pages
-adminRouter.get("/adminusers", async (req, res) => {
+// Admin page views 
+adminRouter.get("/adminusers", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, async (req, res) => {
     try {
         const users = await User.find();
         res.render("admin/adminusers", { users });
@@ -100,15 +102,15 @@ adminRouter.get("/adminusers", async (req, res) => {
     }
 });
 
-adminRouter.get("/adminmenu", (req, res) => {
+adminRouter.get("/adminmenu", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, (req, res) => {
     res.render("admin/adminmenu");
 });
 
-adminRouter.get("/adminorders", (req, res) => {
+adminRouter.get("/adminorders", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, (req, res) => {
     res.render("admin/adminorders");
 });
 
-adminRouter.get("/adminfeedback", (req, res) => {
+adminRouter.get("/adminfeedback", redirectIfNotLoggedIn, failIfUnauthorizedAdmin, (req, res) => {
     res.render("admin/adminfeedback");
 });
 
