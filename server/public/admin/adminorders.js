@@ -1,27 +1,25 @@
 const ordersTableBody = document.querySelector("#ordersTable tbody");
 const historyTableBody = document.querySelector("#historyTable tbody");
 
-// Sample dummy data (replace with backend data later)
-let orders = [
-  {
-    id: "ORD001",
-    user: "andrea@example.com",
-    items: "2x Caramel Latte, 1x Croissant",
-    total: "₱350",
-    status: "Pending",
-    date: new Date().toLocaleString()
-  },
-  {
-    id: "ORD002",
-    user: "john@brewmail.com",
-    items: "1x Matcha Frappe",
-    total: "₱180",
-    status: "Pending",
-    date: new Date().toLocaleString()
-  }
-];
-
+let orders = [];
 let history = [];
+
+async function fetchOrders() {
+  try {
+    const res = await axios.get("/admin/orders"); // backend route
+    const data = res.data;
+
+    orders = data.orders.filter(order => order.status === "Pending" || order.status === "Preparing");
+    history = data.orders.filter(order => order.status !== "Pending" && order.status !== "Preparing");
+
+    renderOrders();
+    renderHistory();
+  } catch (err) {
+    console.error("Failed to fetch orders:", err);
+    ordersTableBody.innerHTML = `<tr><td colspan="6" class="empty">Error loading orders</td></tr>`;
+    historyTableBody.innerHTML = `<tr><td colspan="6" class="empty">Error loading history</td></tr>`;
+  }
+}
 
 function renderOrders() {
   ordersTableBody.innerHTML = "";
@@ -35,15 +33,15 @@ function renderOrders() {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-      <td>${order.id}</td>
-      <td>${order.user}</td>
-      <td>${order.items}</td>
-      <td>${order.total}</td>
+      <td>${order._id}</td>
+      <td>${order.user_email}</td>
+      <td>${order.items.map(i => `${i.quantity}x ${i.productName || i.productId?.product_name || "Unknown Item"}`).join(", ")}</td>
+      <td>₱${order.total_price.toFixed(2)}</td>
       <td>${order.status}</td>
       <td>
-        <button class="action-btn confirm" onclick="confirmOrder(${index})">Confirm</button>
-        <button class="action-btn cancel" onclick="cancelOrder(${index})">Cancel</button>
-        <button class="action-btn delete" onclick="deleteOrder(${index})">Delete</button>
+        <button class="action-btn confirm" onclick="confirmOrder('${order._id}')">Confirm</button>
+        <button class="action-btn cancel" onclick="cancelOrder('${order._id}')">Cancel</button>
+        <button class="action-btn delete" onclick="deleteOrder('${order._id}')">Delete</button>
       </td>
     `;
 
@@ -63,45 +61,46 @@ function renderHistory() {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-      <td>${order.id}</td>
-      <td>${order.user}</td>
-      <td>${order.items}</td>
-      <td>${order.total}</td>
+      <td>${order._id}</td>
+      <td>${order.user_email}</td>
+      <td>${order.items.map(i => `${i.quantity}x ${i.productName || i.productId?.product_name || "Unknown Item"}`).join(", ")}</td>
+      <td>₱${order.total_price.toFixed(2)}</td>
       <td>${order.status}</td>
-      <td>${order.date}</td>
+      <td>${new Date(order.order_date).toLocaleString()}</td>
     `;
 
     historyTableBody.appendChild(row);
   });
 }
 
-function confirmOrder(index) {
-  const order = orders[index];
-  order.status = "Completed";
-  order.date = new Date().toLocaleString();
-  history.push(order);
-  orders.splice(index, 1);
-  renderOrders();
-  renderHistory();
+// Backend updates
+async function confirmOrder(orderId) {
+  await updateOrderStatus(orderId, "Completed");
 }
 
-function cancelOrder(index) {
-  const order = orders[index];
-  order.status = "Cancelled";
-  order.date = new Date().toLocaleString();
-  history.push(order);
-  orders.splice(index, 1);
-  renderOrders();
-  renderHistory();
+async function cancelOrder(orderId) {
+  await updateOrderStatus(orderId, "Cancelled");
 }
 
-function deleteOrder(index) {
-  if (confirm("Are you sure you want to delete this order?")) {
-    orders.splice(index, 1);
-    renderOrders();
+async function deleteOrder(orderId) {
+  if (!confirm("Are you sure you want to delete this order?")) return;
+
+  try {
+    await axios.delete(`/admin/orders/${orderId}`);
+    await fetchOrders();
+  } catch (err) {
+    alert("Failed to delete order");
   }
 }
 
-// Initial render
-renderOrders();
-renderHistory();
+async function updateOrderStatus(orderId, status) {
+  try {
+    await axios.put(`/admin/orders/${orderId}`, { status });
+    await fetchOrders();
+  } catch (err) {
+    alert("Failed to update order");
+  }
+}
+
+// Initial load
+fetchOrders();
