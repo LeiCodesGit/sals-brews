@@ -1,5 +1,5 @@
 <style>
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -41,19 +41,39 @@ body {
     transform: scale(1.05);
 }
 
+.logout-btn {
+    background: none;
+    border: none;
+    color: #452e1e;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Bricolage Grotesque", sans-serif;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    color: #47532b;
+    font-size: 21px;
+    border-bottom: 2px solid #47532b;
+    transform: scale(1.05);
+}
+
 .menu-icon {
     display: inline-block;
 }
 </style>
-
-    <div class="navbar">
-        <div><a href="/"><img src="/assets/SBhomeLogo.png"></a></div>
-        <div class="salsHeader">
-            <header class="salsHeader">
-                <a href="/home" class="salsLink">Home</a>
-                <a class="salsLink" href="/menu">Menu</a>
-                <a class="salsLink" href="/contact">Contact Us</a>
-                <a class="cart" href="/users/cart"><img src="/assets/shoppingCart.png" height="28px" width="28px"></a>
-            </header>
-        </div>
+<div class="navbar">
+    <div><a href="/"><img src="/assets/SBhomeLogo.png"></a></div>
+    <div class="salsHeader">
+        <header class="salsHeader">
+            <a href="/home" class="salsLink">Home</a>
+            <a class="salsLink" href="/menu">Menu</a>
+            <a class="salsLink" href="/contact">Contact Us</a>
+            <a class="cart" href="/users/cart"><img src="/assets/shoppingCart.png" height="28px" width="28px"></a>
+            <a id="signoutBtn" title="Logout"><img src="/assets/logout-icon.png" alt="Logout" height="28px" width="28px"></a>
+        </header>
     </div>
+</div>
+
+<script src="/auth/signout.js"></script>

@@ -116,7 +116,17 @@ td {
 /* end Table */
 
 
-#check-out {
+#content {
+    flex: 1;
+    padding-bottom: 100px; 
+}
+
+#buttons {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.confirm-btn {
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bolder;
     padding: 10px 30px;
@@ -125,4 +135,11 @@ td {
     border: none;
     background-color: #47532b;
     color: #cbb897;
+    margin-bottom: 60px;  
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

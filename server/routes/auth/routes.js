@@ -2,15 +2,16 @@ import express from "express";
 import bcrypt from "bcrypt";
 import User from "../../models/users.js";
 import mongoose from "mongoose";
+import redirectIfLoggedIn from "../../middlewares/redirectIfLoggedIn.js";
 
 const authRouter = express.Router();
 
 // Render login and register pages
-authRouter.get("/login", (req, res) => {
+authRouter.get("/login", redirectIfLoggedIn, (req, res) => {
     res.render("auth/login");
 });
 
-authRouter.get("/register", (req, res) => {
+authRouter.get("/register", redirectIfLoggedIn, (req, res) => {
     res.render("auth/register");
 });
 
@@ -111,10 +112,9 @@ authRouter.post("/logout", (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Logout failed" });
         }
+        res.clearCookie("connect.sid"); // Clear session cookie
         res.json({ message: "Logout successful" });
     });
 });
-
-
 
 export default authRouter;
