@@ -87,8 +87,8 @@
         function submitCheckout() {
             const confirmOrder = confirm("Are you sure you want to proceed to checkout?");
             if (confirmOrder) {
-                document.getElementById("checkoutForm").submit();
-                window.location.href = "/users/orderinfo";
+                const form = document.getElementById("checkoutForm");
+                form.submit();
             }
         }
     </script>
