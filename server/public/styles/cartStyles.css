@@ -126,7 +126,7 @@ td {
     text-align: center;
 }
 
-#check-out {
+.confirm-btn {
     font-family: "Bricolage Grotesque", sans-serif;
     font-weight: bolder;
     padding: 10px 30px;
