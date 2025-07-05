@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const redirectIfLoggedIn = (req, res, next) => {
     if (req.session.user) {
         // Check if the logged-in user is admin or customer
@@ -10,3 +11,16 @@ const redirectIfLoggedIn = (req, res, next) => {
 
     next(); 
 };
+=======
+export default function redirectIfLoggedIn(req, res, next) {
+    if (req.session && req.session.user) {
+        // Redirect based on user type
+        if (req.session.user.userType === "admin") {
+            return res.redirect("/admin/adminmenu");
+        } else {
+            return res.redirect("/home");
+        }
+    }
+    next();
+}
+>>>>>>> 6e2c63a73426c1004803a55ea4426f903b1f389f
