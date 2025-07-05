@@ -68,6 +68,7 @@
 </div>
 
 <!-- Script -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     let quantity = 1;
 
@@ -99,45 +100,33 @@
     }
 
     async function addToCart(productId) {
-    const quantity = parseInt(document.getElementById("quantityValue").textContent);
+        const quantity = parseInt(document.getElementById("quantityValue").textContent);
 
-    // Get selected size, temp, addons
-    const selectedSize = document.querySelector('[data-group="size"] .selected')?.dataset.label;
-    const selectedTemp = document.querySelector('[data-group="temperature"] .selected')?.textContent.trim();
-    const selectedAddons = [...document.querySelectorAll('[data-group="addons"] .selected')]
-    .map(btn => btn.dataset.name);
+        // Get selected size, temp, addons
+        const selectedSize = document.querySelector('[data-group="size"] .selected')?.dataset.label;
+        const selectedTemp = document.querySelector('[data-group="temperature"] .selected')?.textContent.trim();
+        const selectedAddons = [...document.querySelectorAll('[data-group="addons"] .selected')]
+        .map(btn => btn.dataset.name);
 
 
-    try {
-        const res = await fetch("/api/cart", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-            productId,
-            quantity,
-            selectedSize,
-            selectedTemp,
-            selectedAddons
-            }),
-        });
-
-        const contentType = res.headers.get("content-type");
-        const data = contentType.includes("application/json")
-            ? await res.json()
-            : { message: await res.text() };
-
-        if (res.ok) {
-            alert(data.message);
-            window.location.href = "/users/cart";
-        } else {
-            alert("Failed to add item: " + data.message);
+        try {
+            const res = await axios.post("/users", {
+                productId,
+                quantity,
+                selectedSize,
+                selectedTemp,
+                selectedAddons
+            });
+            if (res.status === 200 && res.data?.cart) {
+                alert(res.data.message || "Added to cart!");
+                window.location.href = "/users/cart";
+            } else {
+                alert("Failed to add item: " + (res.data?.message || "Unknown error"));
+            }
+        } catch (err) {
+            console.error("Error:", err);
+            alert("Something went wrong. Check the console.");
         }
-    } catch (err) {
-        console.error("Error:", err);
-        alert("Something went wrong. Check the console.");
-    }
     }
 
 </script>

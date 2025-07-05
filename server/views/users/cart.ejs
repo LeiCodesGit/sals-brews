@@ -21,57 +21,76 @@
             <div id="content">
                 <div id="table">
                     <h1>Your Cart</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Details</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cartItems">
-                            <% cart.items.forEach(item => { %>
+
+                    <p id="itemCount">
+                    <% if (cart.items.length > 0) { %>
+                        Total Items: <%= cart.items.length %>
+                    <% } else { %>
+                        Your cart is empty.
+                    <% } %>
+                    </p>
+                    <form id="checkoutForm" action="/users/cart/checkout" method="POST">
+                        <input type="hidden" name="totalPrice" value="<%= cart.totalPrice || 0 %>">
+                        <input type="hidden" name="itemCount" value="<%= cart.items.length %>">
+
+                        <table>
+                            <thead>
                                 <tr>
-                                    <!-- Product Image + Name -->
-                                    <td>
-                                    <img src="<%= item.productId.product_image || '/assets/default-placeholder.png' %>" 
-                                        alt="<%= item.productId.product_name %>" 
-                                        style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
-                                    <p><%= item.productId.product_name %></p>
-                                    </td>
-
-                                    <!-- Selected Options -->
-                                    <td>
-                                    <% if (item.selectedSize) { %>
-                                        <p>Size: <%= item.selectedSize %></p>
-                                    <% } %>
-                                    <% if (item.selectedTemp) { %>
-                                        <p>Temp: <%= item.selectedTemp %></p>
-                                    <% } %>
-                                    <% if (item.selectedAddons && item.selectedAddons.length) { %>
-                                        <p>Add-ons: <%= item.selectedAddons.join(", ") %></p>
-                                    <% } %>
-                                    </td>
-
-                                    <!-- Quantity -->
-                                    <td><%= item.quantity %></td>
-
-                                    <!-- Total Price -->
-                                    <td>₱<%= item.totalPrice.toFixed(2) %></td>
+                                    <th>Item</th>
+                                    <th>Details</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
                                 </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="cartItems">
+                                <% cart.items.forEach(item => { %>
+                                    <tr>
+                                        <!-- Product Image + Name -->
+                                        <td>
+                                            <img src="<%= item.productId.product_image || '/assets/default-placeholder.png' %>" 
+                                                alt="<%= item.productId.product_name %>" 
+                                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                            <p><%= item.productId.product_name %></p>
+                                        </td>
+
+                                        <!-- Selected Options -->
+                                        <td>
+                                            <% if (item.selectedSize) { %>
+                                                <p>Size: <%= item.selectedSize %></p>
+                                            <% } %>
+                                            <% if (item.selectedTemp) { %>
+                                                <p>Temp: <%= item.selectedTemp %></p>
+                                            <% } %>
+                                            <% if (item.selectedAddons && item.selectedAddons.length) { %>
+                                                <p>Add-ons: <%= item.selectedAddons.join(", ") %></p>
+                                            <% } %>
+                                        </td>
+
+                                        <!-- Quantity -->
+                                        <td><%= item.quantity %></td>
+
+                                        <!-- Total Price -->
+                                        <td>₱<%= item.totalPrice.toFixed(2) %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </form>
+
                 </div>
 
-                <div id="buttons">
-                    <a href="/orderinfo" id="check-out">Check Out</a>
-                </div>
-                
+                <button type="button" onclick="submitCheckout()" class="confirm-btn">Confirm</button>
             </div>
             <%- include('../partials/footer') %>
         </div>
+    <script>
+        function submitCheckout() {
+            const confirmOrder = confirm("Are you sure you want to proceed to checkout?");
+            if (confirmOrder) {
+                document.getElementById("checkoutForm").submit();
+                window.location.href = "/users/orderinfo";
+            }
+        }
+    </script>
 </body>
-
 </html>

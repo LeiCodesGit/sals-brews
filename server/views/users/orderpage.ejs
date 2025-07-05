@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/fc9b5f3f34.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sal's Brews - Checkout</title>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/styles/orderinfoStyles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('../partials/navbar') %>
+
+    <div class="page-wrapper">
+        <h1>MY ORDER</h1>
+        <div id="content">
+            <form id="checkoutForm" action="/users/order/confirm" method="POST">
+                <div class="order-summary">
+                    <p><strong>Total Price:</strong> ₱<%= order.total_price?.toFixed(2) || "0.00" %></p>
+
+                    <label for="delivery_address"><strong>Delivery Address:</strong></label>
+                    <input 
+                        type="text" 
+                        name="delivery_address" 
+                        id="delivery_address" 
+                        value="<%= order.delivery_address || user?.address || '' %>" 
+                        required
+                    >
+
+                    <label for="payment_method"><strong>Payment Method:</strong></label>
+                    <select name="payment_method" id="payment_method" required>
+                        <option value="Cash" <%= order.payment_method === "Cash" ? "selected" : "" %>>Cash</option>
+                        <option value="GCash" <%= order.payment_method === "GCash" ? "selected" : "" %>>GCash</option>
+                        <option value="Card" <%= order.payment_method === "Card" ? "selected" : "" %>>Card</option>
+                    </select>
+
+                    <div class="btn-group">
+                        <button type="button" onclick="confirmOrder()" class="confirm-btn">Confirm</button>
+                        <button type="button" onclick="cancelOrder()" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>
+
+    <script>
+        function confirmOrder() {
+            const address = document.getElementById("delivery_address").value.trim();
+            const payment = document.getElementById("payment_method").value;
+
+            if (!address || !payment) {
+                alert("Please complete all fields before confirming.");
+                return;
+            }
+
+            const proceed = confirm("Are you sure you want to confirm this order?");
+            if (proceed) {
+                document.getElementById("checkoutForm").submit();
+            }
+        }
+
+        function cancelOrder() {
+            const cancel = confirm("Cancel your order and return to your cart?");
+            if (cancel) {
+                // Just go back to the cart without submitting the form
+                window.location.href = "/users/cart";
+            }
+        }
+    </script>
+</body>
+</html>
