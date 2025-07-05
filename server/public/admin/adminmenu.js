@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("addItemModal");
   const openBtn = document.getElementById("addItemBtn");
@@ -252,7 +253,6 @@ window.addEventListener("DOMContentLoaded", () => {
       reader.onerror = function (error) {
         reject("Error converting image to Base64: " + error);
       };
-
       reader.readAsDataURL(file); // Triggers base64 conversion
     });
   }

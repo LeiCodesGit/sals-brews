@@ -1,7 +1,6 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import User from "../../models/users.js";
-import mongoose from "mongoose";
 
 const authRouter = express.Router();
 
@@ -114,7 +113,5 @@ authRouter.post("/logout", (req, res) => {
         res.json({ message: "Logout successful" });
     });
 });
-
-
 
 export default authRouter;

@@ -10,7 +10,8 @@ import connect from "./database/mongodb-connect.js";
 import redirectIfNotLoggedIn from "./middlewares/redirectIfNotLoggedIn.js";
 import Cart from "./models/cart.js";
 
-// Route imports
+
+// Importing routers
 import authRouter from "./routes/auth/routes.js";
 import adminRouter from "./routes/admin/routes.js";
 import productRouter from "./routes/products.js";
