@@ -8,6 +8,113 @@
     <title>Sal's Brews - Checkout</title>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/styles/orderinfoStyles.css">
+
+    <style>
+        /* /styles/orderinfoStyles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fdf6f0;
+    margin: 0;
+    padding: 0;
+}
+
+.page-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+    color: #6b3e26;
+    margin-bottom: 20px;
+    }
+
+.order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-summary p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.confirm-btn,
+.cancel-btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-btn {
+    background-color: #6b3e26;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.confirm-btn:hover {
+    background-color: #5a341f;
+}
+
+.cancel-btn:hover {
+    background-color: #999;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .page-wrapper {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .confirm-btn,
+    .cancel-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+    </style>
 </head>
 <body>
     <!-- Navbar -->
